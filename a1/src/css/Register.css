@@ -1,0 +1,67 @@
+*{
+  margin: 0;
+}
+
+.RegisterStudent-component {
+  background-image: linear-gradient(to right, rgba(255,255,255, 0.5) 0 100%), url(./BVC.png);
+  height: 100vh; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.RegisterStudent-component form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #537188;
+    padding: 30px 50px 25px;
+    box-shadow: 1px 4px 10px 1px #aaa;
+    font-family: sans-serif;
+  }
+  
+  .RegisterStudent-component  form * {
+      box-sizing: border-box;
+  }
+  
+  .RegisterStudent-component form h1, h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .RegisterStudent-component  form input {
+    margin-bottom: 15px;
+  }
+  
+  .RegisterStudent-component form input[type=text], input[type=number], input[type=password]{
+    display: block;
+    height: 32px;
+    padding: 6px 16px;
+    width: 100%;
+    border: none;
+    background-color: #f3f3f3;
+  }
+  
+  
+  .RegisterStudent-component  form button[type=submit] {
+  width: 200px;
+	height: 50px;
+	text-transform: uppercase;
+	font-size: 20px;
+	color: white;
+	letter-spacing: 3px;
+	border-radius: 100px;
+	/* background: rgba(255,255,255,.2); */
+  background: #EEEEEE;
+	border: 2px solid #72bcd4 ;
+	outline: none;
+	cursor: pointer;
+	user-select: none;
+	z-index: 99;
+  margin-left: 50px;
+}
+
+.RegisterStudent-component form button[type=submit]:hover{
+	background: white;
+  color:#192655;
+}
