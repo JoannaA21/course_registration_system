@@ -2,7 +2,7 @@
   margin: 0;
 }
 
-.StudentLogin {
+.Login {
   background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0 100%), url(./BVC.png);
   height: 100vh;
   background-position: center;
@@ -10,7 +10,7 @@
   background-size: cover;
 }
 
-.StudentLogin form {
+.Login form {
   width: 300px;
   margin: 0 auto;
   background-color: #537188;
@@ -19,17 +19,17 @@
   font-family: sans-serif;
 }
 
-.StudentLogin form * {
+.Login form * {
   box-sizing: border-box;
 }
 
-.StudentLogin h1 {
+.Login h1 {
   text-align: center;
   padding-top: 100px;
   margin-bottom: 10px;
 }
 
-.StudentLogin form input[type=text], input[type=password]{
+.Login form input[type=text], input[type=password]{
   display: block;
   height: 32px;
   padding: 6px 16px;
@@ -39,7 +39,7 @@
   margin-top: 10px;
 }
 
-.StudentLogin  form button[type=submit] {
+.Login  form button[type=submit] {
   width: 200px;
 	height: 50px;
 	text-transform: uppercase;
@@ -57,7 +57,7 @@
   margin-top: 10px;
 }
 
-.StudentLogin form button[type=submit]:hover{
+.Login form button[type=submit]:hover{
 	background: white;
   color:#192655;
 }

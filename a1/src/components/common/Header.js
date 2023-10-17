@@ -13,19 +13,13 @@ function Header() {
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/courseRegistrations">Registration</a>
+            <a href="/registration">Registration</a>
           </li>
           <li>
-            <a href="/admin">Admin Login</a>
+            <a href="/login">Student Login</a>
           </li>
           <li>
-            <a href="/admin">Student Login</a>
-          </li>
-          <li>
-            <a href="/studentLogin">Student Login</a>
-          </li>
-          <li>
-            <a href="/registrations">Student SignUp</a>
+            <a href="/adminlogin">Admin Login</a>
           </li>
         </ul>
       </nav>

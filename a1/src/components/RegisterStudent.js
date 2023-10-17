@@ -29,6 +29,10 @@ export const Registration = () =>{
         e.preventDefault()
         setSubmit(true)
         console.log(student)
+
+        // student key/value pairs will be saved in studentData
+        const studentData = JSON.stringify(student)
+        localStorage.setItem('studentdata', studentData)
     }
     
     return(

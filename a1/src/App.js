@@ -7,7 +7,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import AdminLoginPage from './components/AdminLoginPage';
 import { Registration } from './components/RegisterStudent';
 import { Role } from './components/Role';
-import { StudentLogin } from './components/Studentlogin';
+import { Login } from './components/Login';
+import { StudentProfile } from './components/Student';
+import { AdminUsers } from './components/adminUsers';
+import { Hi } from './components/Admin';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import './index.css';
@@ -19,8 +22,13 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Role />} />
-          <Route path="/Studentlogin" element={<StudentLogin />} />
-          <Route path="/Admin" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/adminlogin" element={<Login />} />
+          <Route path="/studentprofile" element={<StudentProfile />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/adminusers" element={<AdminUsers />} />
+          <Route path="/admin" element={<Hi />} />
+
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
           {/* <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
