@@ -1,18 +1,19 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 function Header() {
+  const location = useLocation();
+  const isHomeRoute = location.pathname === '/';
   return (
     <header>
+      {isHomeRoute ? null :
       <nav>
         <ul>
           <li>
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/courses">Courses</a>
-          </li>
-          <li>
-            <a href="/registration">Registration</a>
+            <a href="/courseRegistrations">Registration</a>
           </li>
           <li>
             <a href="/admin">Admin Login</a>
@@ -21,10 +22,14 @@ function Header() {
             <a href="/admin">Student Login</a>
           </li>
           <li>
-            <a href="/signup">Student SignUp</a>
+            <a href="/studentLogin">Student Login</a>
+          </li>
+          <li>
+            <a href="/registrations">Student SignUp</a>
           </li>
         </ul>
       </nav>
+      }
     </header>
   );
 }
