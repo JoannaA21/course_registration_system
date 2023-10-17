@@ -17,17 +17,35 @@ export const StudentLogin = () => {
         setLogin({username:'',password:''})
     }
 
-    return(
-    <>
-   
-        <div className="StudentLogin">
-            <h1>Student Log in</h1>
-            <form>
-                <input type='text' onChange={handleChange} name='username' placeholder='Username'/>
-                <input type='password' onChange={handleChange} name='password' placeholder='Password'/>
-                <button type="submit" onClick={handleSubmit}>Log In</button>
-            </form>
-        </div>    
-    </>
-    )
+    if (window.location.pathname === '/Studentlogin') {
+        return(
+        <>
+       
+            <div className="StudentLogin">
+                <h1>Student Log in</h1>
+                <form>
+                    <input type='text' onChange={handleChange} name='username' placeholder='Username'/>
+                    <input type='password' onChange={handleChange} name='password' placeholder='Password'/>
+                    <button type="submit" onClick={handleSubmit}>Log In</button>
+                </form>
+            </div>    
+        </>
+        )
+
+    } else {
+        return(
+        <>
+       
+            <div className="StudentLogin">
+                <h1>Admin Log in</h1>
+                <form>
+                    <input type='text' onChange={handleChange} name='username' placeholder='Username'/>
+                    <input type='password' onChange={handleChange} name='password' placeholder='Password'/>
+                    <button type="submit" onClick={handleSubmit}>Log In</button>
+                </form>
+            </div>    
+        </>
+        )
+
+    }
 }

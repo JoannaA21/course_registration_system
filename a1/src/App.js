@@ -19,8 +19,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Role />} />
-          <Route path="/login" element={<StudentLogin />} />
-          <Route path="/signup" element={<Registration />} />
+          <Route path="/Studentlogin" element={<StudentLogin />} />
+          <Route path="/Admin" element={<Registration />} />
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
           {/* <Route path="/admin" element={<AdminLoginPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}

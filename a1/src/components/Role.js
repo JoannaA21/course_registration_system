@@ -2,11 +2,13 @@ import '../css/Role.css'
 
 export const Role = () => {
     const StudentPath = () => {
+        window.location.href = "/Studentlogin"
         console.log("Student path")
         //router
     }
 
     const AdminPath = () => {
+        window.location.href = "/Admin"
         console.log("Admin path")
         //router
     }
