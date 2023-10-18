@@ -1,0 +1,144 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.adminpage{
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+  
+.displayCourseContainer {
+    list-style-type: none;
+    background-color: white;
+  }
+  
+  .courseFormContainer{
+    display: flex;
+    justify-content: center;
+    color: black;
+  }
+  
+  .CourseForm{  
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    margin: 2rem 0.5rem 0 0;
+    padding: 1rem 0.5rem 2rem 0rem;
+    border:2px solid black;
+    border-radius: 0.25rem;
+    background-color: white;
+  }
+  
+  .CourseFormTitle{
+    margin-bottom: 2rem;
+  }
+  
+  .courseFormLabel{
+    padding: 1rem 3rem 2rem 0rem;
+  }
+  
+  .CourseForm input, select{
+    /* flex-grow: 1; */
+    width: 200px;
+    min-height: 55px;
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    margin-right: 0.25rem;
+    margin-bottom: .50rem;
+    outline: none;
+  }
+  
+  .btnAdd, .displayCourseRegister{
+    height: 48px;
+    min-width: 300px;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: aliceblue;
+    color: black;
+    cursor: pointer;
+    margin-left: 2.5rem;
+  }
+  
+  .btnAdd:focus, 
+  button.btnAdd:hover {
+    color: white;
+    background-color: limegreen;
+    outline: none;
+  } 
+  
+  
+  
+  .displayCourseContainer{
+    border: 2px solid black;
+    margin: 2rem;
+  }
+  
+  .displayCourseH2{
+    display: flex;
+    justify-content: center;
+    background-color: dodgerblue;
+    color: white;
+    padding: 1.5rem;
+  }
+  
+  .displayCourseDetails{
+    display: flex;
+    justify-content:flex-start;
+    color: black;
+    padding: 1.5rem;
+  }
+  
+  .displayCourseRegister{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 400px;
+    border-radius: 0.50rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: aliceblue;
+    color: black;
+    cursor: pointer;
+    margin: 1rem;
+  }
+  
+  
+  .displayCourseRegister:focus, 
+  .displayCourseRegister:hover {
+    color: white;
+    background-color: red;
+    outline: none;
+  } 
+  
+  
+  .searchForm{
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 2rem 0 0 1rem;
+    padding: 0 0.5rem 0.25rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .searchForm label{
+    position: absolute;
+    left: -99999px;
+  }
+  
+  .searchForm input{
+    flex-grow: 1;
+    max-width: 100%;
+    min-height: 50px;
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    outline: none;
+  }
+  

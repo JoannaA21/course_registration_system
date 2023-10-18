@@ -10,7 +10,7 @@ import { Role } from './components/Role';
 import { Login } from './components/Login';
 import { StudentProfile } from './components/Student';
 import { AdminUsers } from './components/adminUsers';
-import { Hi } from './components/Admin';
+import { Admin } from "./components/Admin";
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import './index.css';
@@ -27,7 +27,7 @@ function App() {
           <Route path="/studentprofile" element={<StudentProfile />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/adminusers" element={<AdminUsers />} />
-          <Route path="/admin" element={<Hi />} />
+          <Route path="/admin" element={<Admin />} />
 
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
           {/* <Route path="/admin" element={<AdminLoginPage />} />
