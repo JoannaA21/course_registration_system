@@ -57,15 +57,16 @@ export const Login = () => {
     if (window.location.pathname === '/login') {
         return(
         <>
-       
             <div className="Login">
-                <h1>Student Log in</h1>
                 <form>
+                <h1>Student Login</h1>
                     <input type='text' onChange={handleChangeForStudent} name='username' placeholder='Username'/>
-                    <input type='password' onChange={handleChangeForStudent} name='password' placeholder='Password'/>
-                    <button type="submit" onClick={handleSubmitForStudent}>Log In</button>
+                    <input type='password'  onChange={handleChangeForStudent} name='password' placeholder='Password'/>
+                    <button type="submit"  onClick={handleSubmitForStudent}>Log In</button>
+
+                    <a href="/registration" className="noAccount">Don't have an account?</a>
                 </form>
-            </div>    
+            </div>  
         </>
         )
 
@@ -73,9 +74,9 @@ export const Login = () => {
         return(
         <>
             <div className="Login">
-                <h1>Admin Log in</h1>
                 <form>
-                    <input type='text' onChange={handleChangeForAdmin} name='username' placeholder='Username'/>
+                <h1>Admin Login</h1>
+                    <input type='text' className="vsbl" onChange={handleChangeForAdmin} name='username' placeholder='Username'/>
                     <input type='password' onChange={handleChangeForAdmin}  name='password' placeholder='Password'/>
                     <button type="submit" onClick={handleSubmitForAdmin}>Log In</button>
                 </form>

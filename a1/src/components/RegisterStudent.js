@@ -45,6 +45,7 @@ export const Registration = () =>{
             <input type='text' id='' value={student.lname} name='lname' onChange={handleData} placeholder='Last name'/>
             <input type='text' id='' value={student.email} name='email' onChange={handleData} placeholder='Email'/>
             <input type='number' id='' value={student.phone} name='phone' onChange={handleData} placeholder='Phone number'/>
+            <label className="dob">Date of Birth</label>
             <input type='date' id='' value={student.dob} name='dob' onChange={handleData} placeholder='Date of Birth'/>
             <input type='text' id='' value={student.department} name='department' onChange={handleData} placeholder='Department'/>
             <input type='text' id='' value={student.program} name='program' onChange={handleData} placeholder='Program'/>

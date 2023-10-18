@@ -3,7 +3,7 @@
 }
 
 .Login {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 0 100%), url(./BVC.png);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0 50%), url(./studentPage.png);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -11,12 +11,11 @@
 }
 
 .Login form {
-  width: 300px;
-  margin: 0 auto;
-  background-color: #537188;
-  padding: 50px 50px;
-  box-shadow: 1px 4px 10px 1px #aaa;
+  width: 241px;
+  background-color: white;
+  padding: 0 50px ;
   font-family: sans-serif;
+  transform: translate(0, 265px);
 }
 
 .Login form * {
@@ -25,21 +24,24 @@
 
 .Login h1 {
   text-align: center;
-  padding-top: 100px;
-  margin-bottom: 10px;
+  margin:auto 0;
+  margin-bottom: 30px;
+  color: red;
 }
 
 .Login form input[type=text], input[type=password]{
   display: block;
-  height: 32px;
+  height: 40px;
   padding: 6px 16px;
   width: 100%;
-  border: none;
+  border: 2px solid black;
   background-color: #f3f3f3;
   margin-top: 10px;
+  border-radius: 100px;
+  opacity:unset;
 }
 
-.Login  form button[type=submit] {
+/* .Login  form button[type=submit] {
   width: 200px;
 	height: 50px;
 	text-transform: uppercase;
@@ -60,4 +62,62 @@
 .Login form button[type=submit]:hover{
 	background: white;
   color:#192655;
+} */
+
+.Login  form button[type=submit] {
+  background-color: #a0aab0;
+  color: rgba(256,256,256,0.5);
+  border:0;
+  border-radius: 100px;
+  display: block;
+  margin: 15px auto 50px; 
+  padding: 15px 45px;
+  width: 170px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  visibility: visible;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  -webkit-transition: all .3s ease;
+
+  &:hover {
+    transition: all .3s ease;
+    /* background-color: rgba(20, 20, 20, 0.8); */
+    background-color: black;
+    color: white;
+    line-break: normal;
+  }
+}
+
+
+.ORregister{
+  text-decoration: none;
+  color: grey;
+  /* text-align: center; */
+margin: 0 auto;
+}
+
+.noAccount{
+  /* background-color: #a0aab0; */
+  color: rgba(256,256,256,0.5);
+  color:#a0aab0;
+  border: 0;
+  border-radius: 100px;
+  text-align: center;
+  width: 120px;
+  text-decoration: none;
+  margin: 10px auto;
+  padding: 7px 7px;
+  cursor: pointer;
+  visibility: visible;
+  text-transform: uppercase;
+
+  &:hover {
+    /* transition: all .3s ease; */
+    /* background-color: rgba(20, 20, 20, 0.8); */
+    background-color: black;
+    color: white;
+    line-break: normal;
+  }
 }

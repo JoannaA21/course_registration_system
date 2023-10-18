@@ -23,6 +23,7 @@
 .role-component h1{
     text-align: center;
     padding-top: 150px;
+    margin-bottom: 10px;
     letter-spacing: 3px;
     font-size: 40px;
 }
