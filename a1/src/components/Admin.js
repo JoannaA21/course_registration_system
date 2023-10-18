@@ -7,6 +7,31 @@ import "../css/admin.css"
 
 export const Admin = () => {
 
+//function for local storage remaining mb
+function getLocalStorageSize() {
+    let totalSize = 0;
+  
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+      const itemSize = (key.length + value.length) * 2; // Size in bytes (UTF-16 encoding)
+  
+      totalSize += itemSize;
+    }
+  
+    // Convert the total size to a more human-readable format (e.g., KB, MB)
+    const formattedSize = (totalSize / 1024).toFixed(2) + ' KB';
+    
+    return {
+      size: totalSize,
+      formattedSize
+    };
+  }
+  
+  const localStorageInfo = getLocalStorageSize();
+  console.log('Total localStorage size:', localStorageInfo.size, 'bytes');
+  console.log('Total localStorage size:', localStorageInfo.formattedSize);
+
 //Courses Data to be Displayed
 const [courses, setCourse] = useState(JSON.parse(localStorage.getItem('ListofCourses') || []));
 
