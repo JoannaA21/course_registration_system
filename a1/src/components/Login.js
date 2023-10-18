@@ -21,16 +21,21 @@ export const Login = () => {
         e.preventDefault()
         setSubmitAdm({username:'', password:''})
 
+        var isAdmin = false
+        
         AdminUsers.forEach(element => {
-            if(element.username === adminlogin.username && element.password === adminlogin.password){
+            if(element.username === adminlogin.username && element.password === adminlogin.password)
+            {
+                isAdmin = true
                 window.location.href = 'admin'
-            }
-            else{
-                alert('Username and password does not match.')
             }
         });
 
-        
+        if(isAdmin){
+            window.location.href = 'admin'
+        }else{
+            alert('Username and/or Password is invalid')
+        }
     }
 
     const handleChangeForStudent=(e)=>{      
