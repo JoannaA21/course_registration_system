@@ -142,7 +142,7 @@ const AddCourse = ({handleSubmit, handleChange, newCourse}) => {
                         </tr>
                         <tr>
                             <td colSpan={2}>
-                                <button type="submit" onClick={() => inputRef.current.focus()}>Add Course</button>
+                                <button className='btnAdd' type="submit" onClick={() => inputRef.current.focus()}>Add Course</button>
                             </td>
                         </tr>                                   
                     </tbody>

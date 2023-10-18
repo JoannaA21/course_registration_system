@@ -2,6 +2,8 @@ import AddCourse from "./AddCourse"
 import Course from "./Course"
 import SearchCourse from "./SearchCourse"
 import { useState } from "react"
+import "../css/admin.css"
+
 
 export const Admin = () => {
 
@@ -59,7 +61,7 @@ const handleSubmit = (e) => {
   
 
     return (
-        <>
+        <div className="adminpage">
             <AddCourse
                 courses={courses}
                 handleChange={handleChange}
@@ -90,6 +92,6 @@ const handleSubmit = (e) => {
                     justifyContent: 'center',
                     margin: '4rem'}}>There are no available Courses</p>
             )}
-        </>
+        </div>
     )
 }
