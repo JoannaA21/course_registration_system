@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import '../css/Login.css'
-import {AdminUsers} from './adminUsers'
+import {AdminUsers, CourseList} from './adminData'
 
 export const Login = () => {
     //student

@@ -9,7 +9,7 @@ import { Registration } from './components/RegisterStudent';
 import { Role } from './components/Role';
 import { Login } from './components/Login';
 import { StudentProfile } from './components/Student';
-import { AdminUsers } from './components/adminUsers';
+import { AdminUsers } from './components/adminData';
 import { Admin } from "./components/Admin";
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
