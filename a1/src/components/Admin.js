@@ -3,7 +3,7 @@ import Course from "./Course"
 import SearchCourse from "./SearchCourse"
 import { useState } from "react"
 import "../css/admin.css"
-
+import {CourseList} from './adminData'
 
 export const Admin = () => {
 
@@ -33,7 +33,7 @@ function getLocalStorageSize() {
   console.log('Total localStorage size:', localStorageInfo.formattedSize);
 
 //Courses Data to be Displayed
-const [courses, setCourse] = useState(JSON.parse(localStorage.getItem('ListofCourses') || []));
+const [courses, setCourse] = useState(JSON.parse(localStorage.getItem('ListofCourses') || JSON.stringify(CourseList) ));
 
 //Initial reset data for Add Course Forms
 const initialNewCourse = {
