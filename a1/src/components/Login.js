@@ -22,12 +22,20 @@ export const Login = () => {
         setSubmitAdm({username:'', password:''})
 
         var isAdmin = false
+        const token = generate_token(32);
+        console.log(token)
         
         AdminUsers.forEach(element => {
+            const login = {
+                ...element,
+                "token": token,
+                "role": 'admin'
+            }
             if(element.username === adminlogin.username && element.password === adminlogin.password)
             {
                 isAdmin = true
                 window.location.href = 'admin'
+                localStorage.setItem('loggedIn', login)
             }
         });
 
@@ -43,19 +51,46 @@ export const Login = () => {
         const value = e.target.value
         setStudent({...studentlogin,[name]:value});
     }
+
+    function generate_token(length){
+        var a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split("");
+        var b = [];
+        for (var i=0; i<length; i++) {
+            var j = (Math.random() * (a.length-1)).toFixed(0);
+            b[i] = a[j];
+        }
+        return b.join("");
+    }
     
     const handleSubmitForStudent =(e)=>{
         e.preventDefault()
         setSubmitStd({username:'',password:''})
 
         const studentData = localStorage.getItem('studentdata')
-        const data = JSON.parse(studentData)
-        
-        if(data.username === studentlogin.username && data.password === studentlogin.password){
-            window.location.href = '/studentprofile'
-        }
-        else{
-            alert('Username and password does not match.')
+        const jsonData = JSON.parse(studentData)
+        let isStudent = false
+        console.log(jsonData)
+        const token = generate_token(32);
+        console.log(token)
+        jsonData.forEach(element => {
+            console.log(element.username)
+            const login = {
+                ...element,
+                "token": token,
+                "role": 'student'
+            }
+            if(element.username === studentlogin.username && element.password === studentlogin.password)
+            {
+                isStudent = true
+                window.location.href = 'studentprofile'
+                localStorage.setItem('loggedIn', JSON.stringify(login))
+            }
+        });
+
+        if(isStudent){
+            window.location.href = 'studentprofile'
+        }else{
+            alert('Username and/or Password is invalid')
         }
     }
 

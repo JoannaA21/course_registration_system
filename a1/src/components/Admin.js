@@ -6,6 +6,8 @@ import "../css/admin.css"
 import {CourseList} from './adminData'
 
 export const Admin = () => {
+    const token = JSON.parse(localStorage.getItem('loggedIn'))
+    if (!token) window.location.href = 'adminlogin'
 
 //function for local storage remaining mb
 function getLocalStorageSize() {

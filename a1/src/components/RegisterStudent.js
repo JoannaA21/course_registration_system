@@ -12,19 +12,19 @@
 //     - Username
 //     - Password
 
-import React, {useState} from 'react'
-import '../css/Register.css'
+import React, { useState } from 'react';
+import '../css/Register.css';
 
-export const Registration = () =>{
-    const[student, setStudents] = useState({fname:"", lname:"", email:"", phone:"", dob:"", dept:"", program:"", username:"", password:"", confirmpassword:""})
-    const[submit, setSubmit]=useState(false)
+export const Registration = () => {
+    const [student, setStudents] = useState({ fname: "", lname: "", email: "", phone: "", dob: "", dept: "", program: "", username: "", password: "", confirmpassword: "" });
+    const [submit, setSubmit] = useState(false);
 
     const handleData = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setStudents({...student,[name]:value})
-    }
-    
+        setStudents({ ...student, [name]: value });
+    };
+
     // const handleSubmit = (e) =>{
     //     e.preventDefault()
     //     setSubmit(true)
@@ -36,50 +36,58 @@ export const Registration = () =>{
     // }
 
     //Generate studentid/studentdata
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-        setSubmit(true)
-        console.log(student.length)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmit(true);
+        console.log(student.length);
 
-        const studentid = student.length ? student[student.length - 1].id + 2024: 2024;
-        const studData = {...student, studentid}
-        const studentData = JSON.stringify(studData)
-        console.log(studData);
-        const data = localStorage.getItem('studentdata')
-        if(!data){
-            localStorage.setItem('studentdata', studentData)
-        } else {
-            let storageData = localStorage.getItem('studentdata')
-            console.log(storageData)
-            var newStudentList = [storageData, JSON.stringify(studData)]
-            console.log(newStudentList)
-            localStorage.setItem('studentdata', newStudentList)
+        const storedData = localStorage.getItem('studentdata');
+        let existingData = [];
+
+        if (storedData) {
+            existingData = JSON.parse(storedData);
         }
-       
-    }
 
-    
-    return(
+        const newUsername = student.username;
+        const usernameExists = existingData.some(item => item.username === newUsername);
+
+        if (usernameExists) {
+            console.log('Username already exists.');
+            alert('Username already exists.')
+        } else {
+            const nextId = existingData.length > 0 ? existingData[existingData.length - 1].id + 1 : 2024;
+            const studentData = {
+                id: nextId,
+                ...student
+            };
+            existingData.push(studentData);
+            localStorage.setItem('studentdata', JSON.stringify(existingData));
+            console.log('Updated student data:', studentData);
+        }
+    };
+
+
+    return (
         <>
-        <div className="RegisterStudent-component">
-        <form onSubmit={handleSubmit}>
-            <h1>Bow Valley College</h1>
-            <h3>Registration Form</h3>
-            <input type='text' id='' value={student.fname} name='fname' onChange={handleData} placeholder='First name'/>
-            <input type='text' id='' value={student.lname} name='lname' onChange={handleData} placeholder='Last name'/>
-            <input type='text' id='' value={student.email} name='email' onChange={handleData} placeholder='Email'/>
-            <input type='number' id='' value={student.phone} name='phone' onChange={handleData} placeholder='Phone number'/>
-            <label className="dob">Date of Birth</label>
-            <input type='date' id='' value={student.dob} name='dob' onChange={handleData} placeholder='Date of Birth'/>
-            <input type='text' id='' value={student.department} name='department' onChange={handleData} placeholder='Department'/>
-            <input type='text' id='' value={student.program} name='program' onChange={handleData} placeholder='Program'/>
-            <input type='text' id='' value={student.username} name='username' onChange={handleData} placeholder='Username'/>
-            <input type='password' id='' value={student.password} name='password' onChange={handleData} placeholder='Password'/>
-            <input type='password' id='' value={student.confirmpassword} name='confirmpassword' onChange={handleData} placeholder='Confirm Password'/>
-            <button type="submit">Register</button>
-        </form>
-        </div>
+            <div className="RegisterStudent-component">
+                <form onSubmit={handleSubmit}>
+                    <h1>Bow Valley College</h1>
+                    <h3>Registration Form</h3>
+                    <input type='text' id='' value={student.fname} name='fname' onChange={handleData} placeholder='First name' />
+                    <input type='text' id='' value={student.lname} name='lname' onChange={handleData} placeholder='Last name' />
+                    <input type='text' id='' value={student.email} name='email' onChange={handleData} placeholder='Email' />
+                    <input type='number' id='' value={student.phone} name='phone' onChange={handleData} placeholder='Phone number' />
+                    <label className="dob">Date of Birth</label>
+                    <input type='date' id='' value={student.dob} name='dob' onChange={handleData} placeholder='Date of Birth' />
+                    <input type='text' id='' value={student.department} name='department' onChange={handleData} placeholder='Department' />
+                    <input type='text' id='' value={student.program} name='program' onChange={handleData} placeholder='Program' />
+                    <input type='text' id='' value={student.username} name='username' onChange={handleData} placeholder='Username' />
+                    <input type='password' id='' value={student.password} name='password' onChange={handleData} placeholder='Password' />
+                    <input type='password' id='' value={student.confirmpassword} name='confirmpassword' onChange={handleData} placeholder='Confirm Password' />
+                    <button type="submit">Register</button>
+                </form>
+            </div>
         </>
-    )
+    );
 }
 

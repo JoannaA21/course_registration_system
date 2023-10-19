@@ -3,7 +3,8 @@ import { CourseList } from "./adminData"
 import Course from "./Course"
 
 export const StudentProfile = () => {
-
+    const token = JSON.parse(localStorage.getItem('loggedIn'))
+    if (!token) window.location.href = 'login'
     const [search, setSearch] = useState(JSON.parse(localStorage.getItem('ListofCourses') || JSON.stringify(CourseList) ));
     let [studentSearch, setStudentSearch] = useState('');
     const[searchBtn,setSearchButton]=useState(false);
