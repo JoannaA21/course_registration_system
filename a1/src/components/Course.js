@@ -1,4 +1,4 @@
-const Course = ({courses, handleDelete}) => {
+const Course = ({courses, handleDelete, handleRegister}) => {
     //Maps through all the courses data and displays it
     return (
         <ul>
@@ -10,7 +10,9 @@ const Course = ({courses, handleDelete}) => {
                     <p className="displayCourseDetails">Course Schedule : {course.days}</p>
                     <p className="displayCourseDetails">Course Time : {course.starttime} - {course.endtime}</p>
                     <p className="displayCourseDetails">Course Instructor : {course.instructor}</p>
-                    <button className="displayCourseRegister" onClick={ ()=> handleDelete(course.id)}>Delete</button>
+                    {/* <button className="displayCourseRegister" onClick={ ()=> handleDelete(course.id)}>Delete</button> */}
+                    {handleDelete ? <button className="displayCourseRegister" onClick={ ()=> handleDelete(course.id)}>Delete</button> : null }
+                    <button className="displayCourseRegister" onClick={ ()=> handleRegister(course.id)}>Register</button>
                 </li>
             ))}
         </ul>

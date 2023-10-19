@@ -1,5 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+
 
 function Header() {
   const location = useLocation();
@@ -10,16 +11,16 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/registration">Registration</a>
+            <Link to="/registration">Registration</Link>
           </li>
           <li>
-            <a href="/login">Student Login</a>
+            <Link to="/login">Student Login</Link>
           </li>
           <li>
-            <a href="/adminlogin">Admin Login</a>
+            <Link to="/adminlogin">Admin Login</Link>
           </li>
         </ul>
       </nav>

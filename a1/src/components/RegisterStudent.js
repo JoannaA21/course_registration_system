@@ -25,15 +25,39 @@ export const Registration = () =>{
         setStudents({...student,[name]:value})
     }
     
+    // const handleSubmit = (e) =>{
+    //     e.preventDefault()
+    //     setSubmit(true)
+    //     console.log(student)
+
+    //     // student key/value pairs will be saved in studentData
+    //     const studentData = JSON.stringify(student)
+    //     localStorage.setItem('studentdata', studentData)
+    // }
+
+    //Generate studentid/studentdata
     const handleSubmit = (e) =>{
         e.preventDefault()
         setSubmit(true)
-        console.log(student)
+        console.log(student.length)
 
-        // student key/value pairs will be saved in studentData
-        const studentData = JSON.stringify(student)
-        localStorage.setItem('studentdata', studentData)
+        const studentid = student.length ? student[student.length - 1].id + 2024: 2024;
+        const studData = {...student, studentid}
+        const studentData = JSON.stringify(studData)
+        console.log(studData);
+        const data = localStorage.getItem('studentdata')
+        if(!data){
+            localStorage.setItem('studentdata', studentData)
+        } else {
+            let storageData = localStorage.getItem('studentdata')
+            console.log(storageData)
+            var newStudentList = [storageData, JSON.stringify(studData)]
+            console.log(newStudentList)
+            localStorage.setItem('studentdata', newStudentList)
+        }
+       
     }
+
     
     return(
         <>

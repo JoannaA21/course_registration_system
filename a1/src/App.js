@@ -9,7 +9,6 @@ import { Registration } from './components/RegisterStudent';
 import { Role } from './components/Role';
 import { Login } from './components/Login';
 import { StudentProfile } from './components/Student';
-import { AdminUsers } from './components/adminData';
 import { Admin } from "./components/Admin";
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -26,7 +25,6 @@ function App() {
           <Route path="/adminlogin" element={<Login />} />
           <Route path="/studentprofile" element={<StudentProfile />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/adminusers" element={<AdminUsers />} />
           <Route path="/admin" element={<Admin />} />
 
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
