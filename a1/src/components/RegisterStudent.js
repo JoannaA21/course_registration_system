@@ -38,7 +38,6 @@ export const Registration = () => {
     //Generate studentid/studentdata
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSubmit(true);
         console.log(student.length);
 
         const storedData = localStorage.getItem('studentdata');
@@ -50,11 +49,19 @@ export const Registration = () => {
 
         const newUsername = student.username;
         const usernameExists = existingData.some(item => item.username === newUsername);
+        const newUserpass = student.password;
+        const newUserconfirmPass = student.confirmpassword;
 
         if (usernameExists) {
             console.log('Username already exists.');
             alert('Username already exists.')
-        } else {
+            setSubmit(false);
+        } else if (!newUserpass || !newUserconfirmPass || newUserpass !== newUserconfirmPass) {
+            console.log('Password are not the same.');
+            alert('Oops. Password did not match.')
+            document.querySelector("#root > div > div > form > input[type=password]:nth-child(12)").focus()
+            setSubmit(false);
+        }  else {
             const nextId = existingData.length > 0 ? existingData[existingData.length - 1].id + 1 : 2024;
             const studentData = {
                 id: nextId,
@@ -63,6 +70,7 @@ export const Registration = () => {
             existingData.push(studentData);
             localStorage.setItem('studentdata', JSON.stringify(existingData));
             console.log('Updated student data:', studentData);
+            setSubmit(true);
         }
     };
 
