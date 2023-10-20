@@ -22,6 +22,12 @@ function Header() {
           <li>
             <Link to="/adminlogin">Admin Login</Link>
           </li>
+          <li>
+            <Link to="/StudentRegisterCourse">Register for courses</Link>
+          </li>
+          <li>
+            <Link to="/logout">Log out</Link>
+          </li>
         </ul>
       </nav>
       }

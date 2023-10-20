@@ -1,4 +1,4 @@
-const Course = ({courses, handleDelete, handleRegister}) => {
+const Course = ({courses, handleDelete, handleRegister, handleDrop, handleExchange}) => {
     //Maps through all the courses data and displays it
     return (
         <ul>
@@ -12,7 +12,9 @@ const Course = ({courses, handleDelete, handleRegister}) => {
                     <p className="displayCourseDetails">Course Instructor : {course.instructor}</p>
                     {/* <button className="displayCourseRegister" onClick={ ()=> handleDelete(course.id)}>Delete</button> */}
                     {handleDelete ? <button className="displayCourseRegister" onClick={ ()=> handleDelete(course.id)}>Delete</button> : null }
-                    <button className="displayCourseRegister" onClick={ ()=> handleRegister(course.id)}>Register</button>
+                    <button className="displayCourseRegister" onClick={ ()=> handleRegister(course)}>Register</button>
+                    <button className="displayCourseRegister" onClick={ ()=> handleExchange(course)}>Exchange</button>
+                    <button className="displayCourseRegister" onClick={ ()=> handleDrop(course)}>Drop</button>
                 </li>
             ))}
         </ul>

@@ -8,10 +8,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Registration } from './components/RegisterStudent';
 import { Role } from './components/Role';
 import { Login } from './components/Login';
-import { StudentProfile } from './components/Student';
+import { StudentRegisterCourse, StudentInformation } from './components/Student';
 import { Admin } from "./components/Admin";
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import {Logout} from './components/common/Logout';
 import './index.css';
 
 function App() {
@@ -23,9 +24,12 @@ function App() {
           <Route path="/" element={<Role />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<Login />} />
-          <Route path="/studentprofile" element={<StudentProfile />} />
+          <Route path="/StudentRegisterCourse" element={< StudentRegisterCourse />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/studentinfo" element={<StudentInformation />} />
+          <Route path="/logout" element={<Logout />} />
+
 
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
           {/* <Route path="/admin" element={<AdminLoginPage />} />

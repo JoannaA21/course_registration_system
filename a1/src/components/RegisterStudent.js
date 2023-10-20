@@ -16,7 +16,7 @@ import React, { useState } from 'react';
 import '../css/Register.css';
 
 export const Registration = () => {
-    const [student, setStudents] = useState({ fname: "", lname: "", email: "", phone: "", dob: "", dept: "", program: "", username: "", password: "", confirmpassword: "" });
+    const [student, setStudents] = useState({ fname: "", lname: "", email: "", phone: "", dob: "", department: "", program: "", username: "", password: "", confirmpassword: "" });
     const [submit, setSubmit] = useState(false);
 
     const handleData = (e) => {
@@ -71,6 +71,8 @@ export const Registration = () => {
             localStorage.setItem('studentdata', JSON.stringify(existingData));
             console.log('Updated student data:', studentData);
             setSubmit(true);
+            alert('Registration successful!')
+            window.location.href = 'login'
         }
     };
 
