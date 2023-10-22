@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-
+// import 'bootstrap/dist/css/bootstrap.css';
+import "../../css/header.css"
 
 function Header() {
   const location = useLocation();
@@ -8,27 +9,29 @@ function Header() {
   return (
     <header>
       {isHomeRoute ? null :
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/registration">Registration</Link>
-          </li>
-          <li>
-            <Link to="/login">Student Login</Link>
-          </li>
-          <li>
-            <Link to="/adminlogin">Admin Login</Link>
-          </li>
-          <li>
-            <Link to="/StudentRegisterCourse">Register for courses</Link>
-          </li>
-          <li>
-            <Link to="/logout">Log out</Link>
-          </li>
-        </ul>
+      <nav class="navbar">
+        <div class="container">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <Link to="/" class="nav-link">Home</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/registration" class="nav-link">Registration</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/login" class="nav-link">Student Login</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/adminlogin" class="nav-link">Admin Login</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/StudentRegisterCourse" class="nav-link">Register for courses</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/logout" class="nav-link">Log out</Link>
+              </li>
+            </ul>
+          </div>
       </nav>
       }
     </header>
