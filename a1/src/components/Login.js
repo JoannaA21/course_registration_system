@@ -34,7 +34,7 @@ export const Login = () => {
             if (element.username === adminlogin.username && element.password === adminlogin.password) {
                 isAdmin = true;
                 window.location.href = 'admin';
-                localStorage.setItem('loggedIn', login);
+                localStorage.setItem('loggedIn', JSON.stringify(login));
             }
         });
 
