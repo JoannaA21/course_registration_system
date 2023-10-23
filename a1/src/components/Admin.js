@@ -4,6 +4,7 @@ import SearchCourse from "./SearchCourse"
 import { useState } from "react"
 import "../css/admin.css"
 import {CourseList} from './adminData'
+import ContactForm from "./ContactForm"
 
 export const Admin = () => {
     const token = JSON.parse(localStorage.getItem('loggedIn'))
@@ -119,6 +120,10 @@ const handleSubmit = (e) => {
                     justifyContent: 'center',
                     margin: '4rem'}}>There are no available Courses</p>
             )}
+
+            <ContactForm>
+              
+            </ContactForm>
         </div>
     )
 }

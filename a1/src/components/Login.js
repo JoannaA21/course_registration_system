@@ -5,7 +5,7 @@ import '../css/contactFormAdmin.css'; ///For Viewing Only (To be deleted)
 import '../css/contactForm.css'; ///For Viewing Only (To be deleted)
 import { AdminUsers, CourseList } from './adminData';
 import ContactFormAdmin from "./ContactFormAdmin";
-import { ContactForm } from "./ContactForm";
+import ContactForm from "./ContactForm";
 
 export const Login = () => {
     //student
@@ -101,8 +101,8 @@ export const Login = () => {
         return (
             <>
             {/* For Viewing Only To be Deleted */}
-            <ContactForm></ContactForm> 
-            <ContactFormAdmin></ContactFormAdmin>
+            {/* <ContactForm></ContactForm>  */}
+            {/* <ContactFormAdmin></ContactFormAdmin> */}
              {/* For Viewing Only To be Deleted*/}
                 <div className="Login">
                     <form>

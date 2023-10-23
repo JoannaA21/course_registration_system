@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { CourseList } from "./adminData";
 import Course from "./Course";
 import SearchCourse from './SearchCourse';
+import ContactForm from "./ContactForm";
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
@@ -76,6 +77,8 @@ export const StudentRegisterCourse = () => {
                 handleDelete={""}
                 handleRegister={handleRegister}
             />
+
+            <ContactForm></ContactForm>
         </>
     );
 };
