@@ -106,7 +106,6 @@ export const StudentInformation = () => {
             <p><b>Email: </b>{token.email} </p>
             <p><b>Phone: </b>{token.phone} </p>
             <p><b>DOB: </b>{token.dob}</p>
-
         </div>
     );
 };

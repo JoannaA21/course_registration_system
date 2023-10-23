@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 import '../css/Login.css';
+import '../css/contactFormAdmin.css'; ///For Viewing Only (To be deleted)
+import '../css/contactForm.css'; ///For Viewing Only (To be deleted)
 import { AdminUsers, CourseList } from './adminData';
+import ContactFormAdmin from "./ContactFormAdmin";
+import { ContactForm } from "./ContactForm";
 
 export const Login = () => {
     //student
@@ -96,6 +100,10 @@ export const Login = () => {
     if (window.location.pathname === '/login') {
         return (
             <>
+            {/* For Viewing Only To be Deleted */}
+            <ContactForm></ContactForm> 
+            <ContactFormAdmin></ContactFormAdmin>
+             {/* For Viewing Only To be Deleted*/}
                 <div className="Login">
                     <form>
                         <h1>Student Login</h1>
