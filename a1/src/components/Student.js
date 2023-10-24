@@ -25,9 +25,29 @@ export const StudentRegisterCourse = () => {
                     // get course id to hide
                     const courseIdToHide = c.course.id;
                     // hide course register button
-                    const buttonElement = document.querySelector(`#courseRegister-${courseIdToHide}`);
+                    const buttonElement = document.querySelector(`#courseContainer-${courseIdToHide}`);
                     if (buttonElement) {
                         buttonElement.style.display = 'none';
+                    }
+                }
+
+            });
+        }
+
+        const exchange = JSON.parse(localStorage.getItem('exchangecourse') || '[]') 
+        console.log(exchange)
+        if(exchange){
+            console.log(exchange.course)
+            storedCourse.forEach(c => {
+                if (token.id === c.StudentId && c.course.id === exchange.course.id){
+                    const courseId = c.course.id
+
+                    const buttonElement = document.querySelector(`#courseContainer-${courseId}`);
+                    const rbtn = document.querySelector(`#courseRegister-${courseId}`);
+                    if (buttonElement) {
+                        buttonElement.style.display = 'block';
+                        rbtn.style.display = 'none';
+                        buttonElement.style.border = '5px solid green';
                     }
                 }
             });
@@ -56,7 +76,7 @@ export const StudentRegisterCourse = () => {
 
         localStorage.setItem('course', JSON.stringify(existingCourse));
         alert("You have successfully registered!");
-        const buttonElement = document.querySelector(`#courseRegister-${studId.course.id}`);
+        const buttonElement = document.querySelector(`#courseContainer-${studId.course.id}`);
         if (buttonElement) {
             buttonElement.style.display = 'none';
         }
@@ -95,7 +115,19 @@ export const StudentInformation = () => {
             //console.log(e.StudentId)
         });
     }
+
+    const [search, setSearch] = useState(JSON.parse(localStorage.getItem('course') || '[]'));
+    let [studentSearch, setStudentSearch] = useState('');
+    //Student exchnage course
+    const handleExchange = (course) => {
+        let storedCourse = localStorage.getItem('course')
+        localStorage.setItem('exchangecourse', JSON.stringify(course))
+        window.location.href = 'studentregistercourse'
+    }
+
+    //handleDrop
     return (
+        <>
         <div>
             <h2>{token.role}</h2>
             <p><b>Program: </b>{token.program} </p>
@@ -106,7 +138,17 @@ export const StudentInformation = () => {
             <p><b>Email: </b>{token.email} </p>
             <p><b>Phone: </b>{token.phone} </p>
             <p><b>DOB: </b>{token.dob}</p>
-
         </div>
+
+        <Course
+                courses={search.filter(rcourse =>
+                    rcourse.course.code
+                )}
+                handleDelete={""}
+                handleRegister={""}
+                handleExchange={handleExchange}
+            />
+            
+        </>
     );
 };
