@@ -5,8 +5,10 @@ import { useState } from "react"
 import "../css/admin.css"
 import {CourseList} from './adminData'
 import ContactForm from "./ContactForm"
+import { v4 as uuidv4 } from 'uuid';
 
-export const Admin = () => {
+
+export const Admin = ({newquestion,handleResponse,handleSubmitRes, questions}) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'))
     if (!token) window.location.href = 'adminlogin'
 
@@ -56,11 +58,19 @@ const [newCourse, setNewCourse] = useState(initialNewCourse);
 //State for the search Form
 const [searchCourse, setSearch] = useState('');
 
+// //State for the generation of an id TODO
+// const [cid, setID] = useState(3000)
+
 //Function that pushes the new data to the courses array object and stores the data on the local storage
 const setAndSaveCourse = (newCourse) => {
   setCourse(newCourse);
   localStorage.setItem('ListofCourses', JSON.stringify(newCourse));
 }
+
+// const findMaxID = (courses) => {
+//   if(courses.length === 0) return 0;
+//   return Math.max(...courses.map(course => course.id));
+// }
 
 //Handles Changes on the Form
 const handleChange=(e)=>{      
@@ -79,51 +89,73 @@ const handleDelete = (id) => {
 //Handles the submit on Add course Form
 const handleSubmit = (e) => {
   e.preventDefault()
-  const id = courses.length ? courses[courses.length - 1].id + 1 : 1;
+  // const id = cid;
+  // setID(cid + 1);
+  // const maxid = findMaxID(courses);
+  // const id = maxid * 2 + 12 ;
+  const id = uuidv4();
   const newCourseItem = { id, ...newCourse };
   const updatedCourses = Array.isArray(courses) ? [...courses, newCourseItem] : [newCourseItem];;
   setAndSaveCourse(updatedCourses);
 
   setNewCourse(initialNewCourse);
+
 };
   
+const [isFormVisible, setFormVisible] = useState(false);
 
+const toggleFormVisibility = () => {
+  setFormVisible(!isFormVisible);
+};
+
+//Search component
+const filteredCourses = courses.filter(course =>
+  course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
+  course.title.toLowerCase().includes(searchCourse.toLowerCase())
+);
     return (
         <div className="adminpage">
-            <AddCourse
-                courses={courses}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                newCourse ={newCourse}
-            />
 
+            <h2 className="Admin-page-Title">Admin Page</h2>
+           
             <SearchCourse
             searchCourse = {searchCourse}
             setSearch = {setSearch}
             />
 
-            {/* Displaying Courses */}
+          <button onClick={toggleFormVisibility} className="addCourseButton">{isFormVisible ? "Close Form" : "Add New Course"}</button>
 
-            {courses.length ? (
+
+          {isFormVisible && (
+               <AddCourse
+               courses={courses}
+               handleChange={handleChange}
+               handleSubmit={handleSubmit}
+               newCourse ={newCourse}
+            />
+            )}
+          
+          
+          <h2 className="admin-subTitle">Courses</h2>
+
+            {filteredCourses.length ? (
                 <Course
-                    courses={courses.filter(course =>
-                                            course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
-                                            course.title.toLowerCase().includes(searchCourse.toLowerCase())
-                                    )}
+                    courses={filteredCourses}
                     handleDelete={handleDelete}
                 />
             ) : (
-                <p style={{
-                    fontSize:'2rem',
-                    fontWeight:'bolder',
-                    display:'flex',
-                    justifyContent: 'center',
-                    margin: '4rem'}}>There are no available Courses</p>
+                <p  className="no-avail">No courses were found</p>
             )}
 
-            <ContactForm>
-              
-            </ContactForm>
+            <h2 className="admin-subTitle">Questions by Students </h2>
+            <ContactForm
+
+            newquestion={newquestion}
+            questions={questions}
+            handleResponse={handleResponse}
+            handleSubmitRes={handleSubmitRes}
+            />
+
         </div>
     )
 }

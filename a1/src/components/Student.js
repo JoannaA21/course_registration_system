@@ -6,10 +6,14 @@ import ContactForm from "./ContactForm";
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
+    //Gets the toke of the user
     const token = JSON.parse(localStorage.getItem('loggedIn'));
+    //If no token then redirect to login
     if (!token) window.location.href = 'login';
 
+    //Gets the Available Courses on the local storage
     const [search, setSearch] = useState(JSON.parse(localStorage.getItem('ListofCourses') || JSON.stringify(CourseList)));
+    //Displays the students searched Courses
     let [studentSearch, setStudentSearch] = useState('');
     const [searchBtn, setSearchButton] = useState(false);
 
@@ -98,6 +102,8 @@ export const StudentInformation = () => {
             //console.log(e.StudentId)
         });
     }
+
+
     return (
         <div>
             <h2>{token.role}</h2>

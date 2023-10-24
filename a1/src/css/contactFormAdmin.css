@@ -4,19 +4,20 @@
     justify-content: center;
     align-items: center;
     min-height: 40vh;
-    background: #f7f7f7;
-    padding-bottom: 20px;
+    padding: 20px 0;
+
 }
   .admin-content {
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
+    max-width: 700px;
     width: 100%;
     text-align: left;
     font-family: 'Roboto', sans-serif;
   }
+  
   
   .admin-content .FormTitle {
     font-size: 24px;
