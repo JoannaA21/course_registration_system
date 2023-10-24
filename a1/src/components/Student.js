@@ -2,13 +2,18 @@ import { useState, useEffect } from "react";
 import { CourseList } from "./adminData";
 import Course from "./Course";
 import SearchCourse from './SearchCourse';
+import ContactForm from "./ContactForm";
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
+    //Gets the toke of the user
     const token = JSON.parse(localStorage.getItem('loggedIn'));
+    //If no token then redirect to login
     if (!token) window.location.href = 'login';
 
+    //Gets the Available Courses on the local storage
     const [search, setSearch] = useState(JSON.parse(localStorage.getItem('ListofCourses') || JSON.stringify(CourseList)));
+    //Displays the students searched Courses
     let [studentSearch, setStudentSearch] = useState('');
     const [searchBtn, setSearchButton] = useState(false);
 
@@ -76,6 +81,8 @@ export const StudentRegisterCourse = () => {
                 handleDelete={""}
                 handleRegister={handleRegister}
             />
+
+            <ContactForm></ContactForm>
         </>
     );
 };
@@ -95,6 +102,8 @@ export const StudentInformation = () => {
             //console.log(e.StudentId)
         });
     }
+
+
     return (
         <div>
             <h2>{token.role}</h2>
@@ -106,7 +115,6 @@ export const StudentInformation = () => {
             <p><b>Email: </b>{token.email} </p>
             <p><b>Phone: </b>{token.phone} </p>
             <p><b>DOB: </b>{token.dob}</p>
-
         </div>
     );
 };

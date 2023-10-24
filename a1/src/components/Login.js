@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 
 import '../css/Login.css';
+import '../css/contactFormAdmin.css'; ///For Viewing Only (To be deleted)
+import '../css/contactForm.css'; ///For Viewing Only (To be deleted)
 import { AdminUsers, CourseList } from './adminData';
+import ContactForm from "./ContactForm";
+import StudentPage from "./StudentPage";
 
-export const Login = () => {
+export const Login = ({handleChange,handleSubmit,newquestion,questions,handleResponse,handleSubmitRes}) => {
+    
+
     //student
     const [studentlogin, setStudent] = useState({ username: '', password: '' });
     const [submitstd, setSubmitStd] = useState(false);
@@ -96,6 +102,19 @@ export const Login = () => {
     if (window.location.pathname === '/login') {
         return (
             <>
+            {/* For Viewing Only To be Deleted */}
+            {/* <ContactForm></ContactForm>  */}
+            {/* <ContactFormAdmin></ContactFormAdmin> */}
+             {/* For Viewing Only To be Deleted*/}
+    
+             <StudentPage
+                       handleChange={handleChange}
+                       handleSubmit={handleSubmit}
+                       newquestion={newquestion}
+                       questions={questions}
+                       handleResponse={handleResponse}
+                       handleSubmitRes={handleSubmitRes}
+             ></StudentPage>
                 <div className="Login">
                     <form>
                         <h1>Student Login</h1>
