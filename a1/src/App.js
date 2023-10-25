@@ -95,7 +95,7 @@ function App() {
           // questions={questions}
           />} />
           <Route path="/adminlogin" element={<Login />} />
-          <Route path="/StudentRegisterCourse" element={< StudentRegisterCourse />} />
+          <Route path="/studentregistercourse" element={< StudentRegisterCourse />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/admin" element={<Admin 
           // newquestion={newquestion}
