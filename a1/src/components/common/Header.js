@@ -9,29 +9,29 @@ function Header() {
   return (
     <header>
       {isHomeRoute ? null :
-      <nav class="navbar">
-        <div class="container">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Link to="/" class="nav-link">Home</Link>
+      <nav className="navbar">
+        <div className="container">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/" className="nav-link">Home</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/registration" class="nav-link">Registration</Link>
+              <li className="nav-item">
+                <Link to="/registration" className="nav-link">Registration</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/login" class="nav-link">Student Login</Link>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">Student Login</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/adminlogin" class="nav-link">Admin Login</Link>
+              <li className="nav-item">
+                <Link to="/adminlogin" className="nav-link">Admin Login</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/studentinfo" class="nav-link">My Student Information</Link>
+              <li className="nav-item">
+                <Link to="/studentinfo" className="nav-link">My Student Information</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/studentregistercourse" class="nav-link">Register for courses</Link>
+              <li className="nav-item">
+                <Link to="/studentregistercourse" className="nav-link">Register for courses</Link>
               </li>
-              <li class="nav-item">
-                <Link to="/logout" class="nav-link">Log out</Link>
+              <li className="nav-item">
+                <Link to="/logout" className="nav-link">Log out</Link>
               </li>
             </ul>
           </div>

@@ -4,12 +4,11 @@
     justify-content: center;
     align-items: center;
     min-height: 40vh;
-
   }
   
   .ContactFormStudent {
     background-color: #f2f2f2;
-    padding: 20px;
+    padding: 2.5rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 600px;
@@ -68,38 +67,37 @@
 
   /* STYLE FOR REPONSE */
 
-.response-container {
-  background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 600px;
-  width: 100%;
-  text-align: left;
-  font-family: 'Roboto', sans-serif;
-  margin: 3rem;
-}
-
-
-.response-container .FormTitle {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #007BFF;
-}
-
-.answered-question {
-  margin-bottom: 20px;
-}
-
-.answered-question .ContactFormLabel {
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-
-.answered-question p.ContactFormLabel:last-child {
-  margin-bottom: 0;
-}
-
+  .response-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    margin: 3rem auto;
+  }
+  
+  .response-container .FormTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #007BFF;
+  }
+  
+  .answered-question {
+    margin-bottom: 20px;
+  }
+  
+  .answered-question .ContactFormLabel {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .answered-question p.ContactFormLabel:last-child {
+    margin-bottom: 0;
+  }
+  
+  
   

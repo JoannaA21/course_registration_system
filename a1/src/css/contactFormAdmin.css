@@ -1,71 +1,66 @@
-
 .containerForAdmin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 40vh;
-    padding: 20px 0;
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-bottom: 2rem;
 }
-  .admin-content {
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 700px;
-    width: 100%;
-    text-align: left;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  
-  .admin-content .FormTitle {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #007BFF;
-  }
-  
-  .admin-content .student-details p {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  
-  .admin-content .ContactFormLabel {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  
-  .AdminForm {
-    margin-top: 30px; 
-  }
-  
-  
-  .AdminForm textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  
-  .SubmitButtonAdmin {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: .25rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 16px;
-  }
-  
-  .SubmitButtonAdmin:hover {
-    background-color: #0056b3;
-  }
-  
+
+.displayAdminContainer {
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.displayAdminHeader {
+  background-color: #4287f5;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.displayAdminDetails {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  margin: 0;
+  color: #333;
+  border: none;
+}
+
+.displayAdminLabel {
+  font-weight: bold;
+  color: #333;
+}
+
+.displayAdminForm {
+  padding: 1rem;
+}
+
+.displayAdminButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 150px;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #4287f5;
+  color: white;
+  cursor: pointer;
+  margin: 1rem auto;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.displayAdminButton:hover,
+.displayAdminButton:focus {
+  background-color: #326fb8;
+  outline: none;
+}

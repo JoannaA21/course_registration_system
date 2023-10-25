@@ -214,7 +214,7 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                 questions={questions}
             />
 
-            <h2 className="admin-subTitle">Resposes</h2>
+            <h2 className="admin-subTitle">Queries</h2>
 
 
             <Response

@@ -39,9 +39,9 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
-    //const studid = token.id
-    const studentid = 3;
-    const newquestionItem = { studentid,id, ...newquestion };
+    const studid = token.id
+    // const studid = 3;
+    const newquestionItem = { studid,id, ...newquestion };
     const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];;
     setQuestion(updatedQuestion);
     alert('Your question is sent!')
@@ -98,11 +98,13 @@ function App() {
           handleResponse={handleResponse}
           handleSubmitRes={handleSubmitRes}
           />} />
+
           <Route path="/studentinfo" element={<StudentInformation 
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           newquestion={newquestion}
           questions={questions} />} />
+
           <Route path="/logout" element={<Logout />} />
 
 

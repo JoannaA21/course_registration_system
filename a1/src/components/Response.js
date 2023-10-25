@@ -4,21 +4,21 @@ const Response = ({questions}) => {
 
     const user = JSON.parse(localStorage.getItem('loggedIn'));
     const myansweredquestions = questions.filter((data) => 
-        data.studentid === user.id && data.isanswered === true
+        data.studid === user.id && data.isanswered === true
     )
 
     return (
         <>
         {myansweredquestions.length > 0 && (
                 <div className="response-container">
-                    <h2 className="FormTitle">Response</h2>
+                    <h2 className="FormTitle">My Queries</h2>
                     {myansweredquestions.map((question) => (
                     <div key={question.id} className="answered-question">
                         <p className="ContactFormLabel">Your Question: {question.query}</p>
                         <p className="ContactFormLabel">Admin Response: {question.response}</p>
-                </div>
+                    </div>
                 ))}
-      </div>
+                </div>
     )}
         </>
     )

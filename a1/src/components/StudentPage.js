@@ -11,7 +11,7 @@ const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
     //Gets the User Token
     const token = JSON.parse(localStorage.getItem('loggedIn'))
     if (!token) window.location.href = 'studentlogin'
-    const studetnId = 3;
+    const studetnId = token.id;
 
 
     //Declare a State for the list of Courses to be displayed on the registration
@@ -34,8 +34,8 @@ const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
     }
 
     const handleRegister = (courseId) => {
-        const studentData = JSON.parse(localStorage.getItem('loggedIn'));
-        const studetnId = 3;
+        // const studentData = JSON.parse(localStorage.getItem('loggedIn'));
+        // const studetnId = 3;
         //studentData.id;
 
         const mynewCourse ={id:studetnId,courseid:courseId};
@@ -45,8 +45,8 @@ const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
     }
 
     const handleDrop=(courseid)=>{
-        const studentData = JSON.parse(localStorage.getItem('loggedIn'));
-        const studetnId = 3;
+        // const studentData = JSON.parse(localStorage.getItem('loggedIn'));
+        // const studetnId = 3;
         //studentData.id;
 
         const updatedRegisteredCourse = registeredCourses.filter((c)=> !(c.id === studetnId && c.courseid === courseid));
@@ -120,7 +120,7 @@ const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
                 questions={questions}
             />
 
-            <h2 className="admin-subTitle">Resposes</h2>       
+            <h2 className="admin-subTitle">Queries</h2>       
 
             
             <Response
