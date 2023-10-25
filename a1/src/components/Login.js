@@ -107,14 +107,14 @@ export const Login = ({handleChange,handleSubmit,newquestion,questions,handleRes
             {/* <ContactFormAdmin></ContactFormAdmin> */}
              {/* For Viewing Only To be Deleted*/}
     
-             <StudentPage
+             {/* <StudentPage
                        handleChange={handleChange}
                        handleSubmit={handleSubmit}
                        newquestion={newquestion}
                        questions={questions}
                        handleResponse={handleResponse}
                        handleSubmitRes={handleSubmitRes}
-             ></StudentPage>
+             ></StudentPage> */}
                 <div className="Login">
                     <form>
                         <h1>Student Login</h1>

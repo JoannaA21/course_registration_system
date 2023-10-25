@@ -10,7 +10,7 @@ import Response from './Response'
 const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
     //Gets the User Token
     const token = JSON.parse(localStorage.getItem('loggedIn'))
-    if (!token) window.location.href = 'studentlogin'
+    if (!token) window.location.href = 'login'
     const studetnId = 3;
 
 

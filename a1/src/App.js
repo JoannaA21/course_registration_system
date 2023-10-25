@@ -18,7 +18,7 @@ import './index.css';
 function App() {
 
   const token = JSON.parse(localStorage.getItem('loggedIn'))
-    if (!token) window.location.href = 'adminlogin'
+    // if (!token) window.location.href = 'adminlogin'
 
   const [questions, setQuestion] = useState(JSON.parse(localStorage.getItem('questions')) || []);
 
@@ -89,19 +89,20 @@ function App() {
         <Routes>
           <Route path="/" element={<Role />} />
           <Route path="/login" element={<Login
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          newquestion={newquestion}
-          questions={questions}
+          // handleChange={handleChange}
+          // handleSubmit={handleSubmit}
+          // newquestion={newquestion}
+          // questions={questions}
           />} />
           <Route path="/adminlogin" element={<Login />} />
           <Route path="/StudentRegisterCourse" element={< StudentRegisterCourse />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/admin" element={<Admin 
-          newquestion={newquestion}
-          questions={questions}
-          handleResponse={handleResponse}
-          handleSubmitRes={handleSubmitRes}/>} />
+          // newquestion={newquestion}
+          // questions={questions}
+          // handleResponse={handleResponse}
+          // handleSubmitRes={handleSubmitRes}
+          />} />
           <Route path="/studentinfo" element={<StudentInformation />} />
           <Route path="/logout" element={<Logout />} />
 
