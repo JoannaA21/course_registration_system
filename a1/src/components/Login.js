@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import '../css/Login.css';
 import '../css/contactFormAdmin.css'; ///For Viewing Only (To be deleted)
 import '../css/contactForm.css'; ///For Viewing Only (To be deleted)
-import { AdminUsers, CourseList } from './adminData';
+import { AdminUsers, StudentUsers } from './adminData';
 import ContactForm from "./ContactForm";
 import StudentPage from "./StudentPage";
 
-export const Login = ({handleChange,handleSubmit,newquestion,questions,handleResponse,handleSubmitRes}) => {
+export const Login = () => {
     
 
     //student
@@ -71,7 +71,7 @@ export const Login = ({handleChange,handleSubmit,newquestion,questions,handleRes
         e.preventDefault();
         setSubmitStd({ username: '', password: '' });
 
-        const studentData = localStorage.getItem('studentdata');
+        const studentData = localStorage.getItem('studentdata') || JSON.stringify(StudentUsers);
         const jsonData = JSON.parse(studentData);
         let isStudent = false;
         console.log(jsonData);

@@ -25,7 +25,10 @@ function Header() {
                 <Link to="/adminlogin" class="nav-link">Admin Login</Link>
               </li>
               <li class="nav-item">
-                <Link to="/StudentRegisterCourse" class="nav-link">Register for courses</Link>
+                <Link to="/studentinfo" class="nav-link">My Student Information</Link>
+              </li>
+              <li class="nav-item">
+                <Link to="/studentregistercourse" class="nav-link">Register for courses</Link>
               </li>
               <li class="nav-item">
                 <Link to="/logout" class="nav-link">Log out</Link>

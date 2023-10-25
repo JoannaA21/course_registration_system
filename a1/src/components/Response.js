@@ -3,11 +3,8 @@ import React from 'react'
 const Response = ({questions}) => {
 
     const user = JSON.parse(localStorage.getItem('loggedIn'));
-    // const id;
-    const id = 3;
-
     const myansweredquestions = questions.filter((data) => 
-        data.studentid === id && data.isanswered === true
+        data.studentid === user.id && data.isanswered === true
     )
 
     return (

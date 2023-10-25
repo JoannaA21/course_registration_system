@@ -3,6 +3,8 @@ import { CourseList } from "./adminData";
 import Course from "./Course";
 import SearchCourse from './SearchCourse';
 import ContactForm from "./ContactForm";
+import Response from './Response';
+import StudentPage from "./StudentPage";
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
@@ -17,48 +19,6 @@ export const StudentRegisterCourse = () => {
     let [studentSearch, setStudentSearch] = useState('');
     const [searchBtn, setSearchButton] = useState(false);
 
-    // useEffect to hide the button after registration of course.
-    useEffect(() => {
-        const storedCourse = JSON.parse(localStorage.getItem('course') || '[]');
-        // check value if not empty
-        if (storedCourse) {
-            // get all 
-            storedCourse.forEach(c => {
-                console.log(c.course.id);
-                // compare student id with course student id's and then hide it.
-                if (token.id === c.StudentId) {
-                    // get course id to hide
-                    const courseIdToHide = c.course.id;
-                    // hide course register button
-                    const buttonElement = document.querySelector(`#courseContainer-${courseIdToHide}`);
-                    if (buttonElement) {
-                        buttonElement.style.display = 'none';
-                    }
-                }
-
-            });
-        }
-
-        const exchange = JSON.parse(localStorage.getItem('exchangecourse') || '[]') 
-        console.log(exchange)
-        if(exchange){
-            console.log(exchange.course)
-            storedCourse.forEach(c => {
-                if (token.id === c.StudentId && c.course.id === exchange.course.id){
-                    const courseId = c.course.id
-
-                    const buttonElement = document.querySelector(`#courseContainer-${courseId}`);
-                    const rbtn = document.querySelector(`#courseRegister-${courseId}`);
-                    if (buttonElement) {
-                        buttonElement.style.display = 'block';
-                        rbtn.style.display = 'none';
-                        buttonElement.style.border = '5px solid green';
-                    }
-                }
-            });
-        }
-    }, []);
-
     const handleSearch = (e) => {
         e.preventDefault();
         setSearchButton({ search }.SearchCourse);
@@ -69,7 +29,7 @@ export const StudentRegisterCourse = () => {
 
     //Student register for courses
     const handleRegister = (course) => {
-        const studId = { StudentId: token.id, course };
+        const studId = { id: token.id, courseid: course };
         const storedCourse = localStorage.getItem('course');
         let existingCourse = [];
 
@@ -81,11 +41,38 @@ export const StudentRegisterCourse = () => {
 
         localStorage.setItem('course', JSON.stringify(existingCourse));
         alert("You have successfully registered!");
+        window.location.href = 'studentinfo';
         const buttonElement = document.querySelector(`#courseContainer-${studId.course.id}`);
         if (buttonElement) {
             buttonElement.style.display = 'none';
         }
     };
+
+    // available courses
+
+    //Create a function to save registered courses on localstorage and on the registeredCourses State
+    const saveAndSetRegisteredCourses = (course) => {
+        setRegisteredCourses(course);
+        localStorage.setItem('course', JSON.stringify(course));
+    };
+    const handleDrop = (courseid) => {
+        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.id && c.courseid === courseid));
+        saveAndSetRegisteredCourses(updatedRegisteredCourse);
+    };
+    //Declare a State for the list of Courses to be displayed on the registration
+    const [courses, setCourses] = useState(JSON.parse(localStorage.getItem('ListofCourses')) || CourseList);
+    //Define a State to store all Courses a student is registeres in
+    const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    //Define a State for the Search Components
+    const [searchCourse, setSearchCourse] = useState('');
+    const filteredCoursesAvailable = courses.filter((course) => {
+        const isRegistered = registeredCourses.some((c) => c.id === token.id && c.courseid === course.id);
+        return (
+            !isRegistered &&
+            (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
+                course.title.toLowerCase().includes(searchCourse.toLowerCase()))
+        );
+    });
 
     return (
         <>
@@ -93,22 +80,35 @@ export const StudentRegisterCourse = () => {
                 searchCourse={studentSearch}
                 setSearch={setStudentSearch}
             />
-            <Course
+            {/* <Course
                 courses={search.filter(course =>
                     course.code.toLowerCase().includes(studentSearch.toLowerCase()) ||
                     course.title.toLowerCase().includes(studentSearch.toLowerCase())
                 )}
                 handleDelete={""}
                 handleRegister={handleRegister}
-            />
+            /> */}
 
-            <ContactForm></ContactForm>
+            <h2 className="admin-subTitle">Courses</h2>
+
+            {filteredCoursesAvailable.length ? (
+                <Course
+                    courses={filteredCoursesAvailable}
+                    handleRegister={handleRegister}
+                    registeredCourses={registeredCourses}
+                    handleDrop={handleDrop}
+                />
+            ) : (
+                <p className="no-avail">No courses were found</p>
+            )}
+
+            {/* <ContactForm></ContactForm> */}
         </>
     );
 };
 
 //Student information after logged in
-export const StudentInformation = () => {
+export const StudentInformation = ({ handleChange, handleSubmit, newquestion, questions, handleResponse, handleSubmitRes }) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'));
     if (!token) window.location.href = 'login';
 
@@ -127,35 +127,128 @@ export const StudentInformation = () => {
     let [studentSearch, setStudentSearch] = useState('');
     //Student exchnage course
     const handleExchange = (course) => {
-        let storedCourse = localStorage.getItem('course')
-        localStorage.setItem('exchangecourse', JSON.stringify(course))
-        window.location.href = 'studentregistercourse'
-    }
+        let storedCourse = localStorage.getItem('course');
+        localStorage.setItem('exchangecourse', JSON.stringify(course));
+        window.location.href = 'studentregistercourse';
+    };
+
+    //Declare a State for the list of Courses to be displayed on the registration
+    const [courses, setCourses] = useState(JSON.parse(localStorage.getItem('ListofCourses')) || CourseList);
+    //Define a State to store all Courses a student is registeres in
+    const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    const [newCourse, setNewCourse] = useState({});
+    //Define a State for the Search Components
+    const [searchCourse, setSearchCourse] = useState('');
+    const saveAndSetRegisteredCourses = (course) => {
+        setRegisteredCourses(course);
+        localStorage.setItem('course', JSON.stringify(course));
+    };
+
+    const handleRegister = (courseId) => {
+        const mynewCourse = { id: token.id, courseid: courseId };
+        setNewCourse(mynewCourse);
+        const updatedRegisteredCourse = Array.isArray(registeredCourses) ? [...registeredCourses, mynewCourse] : [mynewCourse];
+        saveAndSetRegisteredCourses(updatedRegisteredCourse);
+    };
+
+    const handleDrop = (courseid) => {
+        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.id && c.courseid === courseid));
+        saveAndSetRegisteredCourses(updatedRegisteredCourse);
+        alert('Course successfully dropped.');
+    };
+
+    const filteredCoursesRegistered = courses.filter((course) => {
+        const isRegistered = registeredCourses.some((c) => c.id === token.id && c.courseid === course.id);
+        return (
+            isRegistered &&
+            (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
+                course.title.toLowerCase().includes(searchCourse.toLowerCase()))
+        );
+    });
 
     //handleDrop
     return (
         <>
-        <div>
-            <h2>{token.role}</h2>
-            <p><b>Program: </b>{token.program} </p>
-            <p><b>Department: </b>{token.department} </p>
-            <p><b>Username: </b> {token.username}</p>
-            <p><b>First name: </b>{token.fname} </p>
-            <p><b>Last name: </b>{token.lname} </p>
-            <p><b>Email: </b>{token.email} </p>
-            <p><b>Phone: </b>{token.phone} </p>
-            <p><b>DOB: </b>{token.dob}</p>
-        </div>
+            <h2 className="admin-subTitle">My Information</h2>
+            <div>
+                <h2>{token.role}</h2>
+                <p><b>Program: </b>{token.program} </p>
+                <p><b>Department: </b>{token.department} </p>
+                <p><b>Username: </b> {token.username}</p>
+                <p><b>First name: </b>{token.fname} </p>
+                <p><b>Last name: </b>{token.lname} </p>
+                <p><b>Email: </b>{token.email} </p>
+                <p><b>Phone: </b>{token.phone} </p>
+                <p><b>DOB: </b>{token.dob}</p>
+            </div>
 
-        <Course
+            <h2 className="admin-subTitle">My Courses</h2>
+            {/* <Course
                 courses={search.filter(rcourse =>
                     rcourse.course.code
                 )}
                 handleDelete={""}
                 handleRegister={""}
                 handleExchange={handleExchange}
+            /> */}
+            {filteredCoursesRegistered.length ? (
+                <Course
+                    courses={filteredCoursesRegistered}
+                    handleRegister={handleRegister}
+                    registeredCourses={registeredCourses}
+                    handleDrop={handleDrop}
+                    handleExchange={handleExchange}
+                />
+            ) : (
+                <p className="no-avail">You are not registered in any courses</p>
+            )}
+
+            <h2 className="admin-subTitle">Have a Question? </h2>
+
+            <ContactForm
+                role="student"
+                id={token.id}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                newquestion={newquestion}
+                questions={questions}
             />
-            
+
+            <h2 className="admin-subTitle">Resposes</h2>
+
+
+            <Response
+                questions={questions}
+            />
+
         </>
     );
 };
+
+// export const StudentInformation = ({handleChange,handleSubmit,newquestion,questions,handleResponse,handleSubmitRes}) => {
+//         const token = JSON.parse(localStorage.getItem('loggedIn'));
+//         if (!token) window.location.href = 'login';
+//     return (
+//         <>
+//         <div>
+//             <h2>{token.role}</h2>
+//             <p><b>Program: </b>{token.program} </p>
+//             <p><b>Department: </b>{token.department} </p>
+//             <p><b>Username: </b> {token.username}</p>
+//             <p><b>First name: </b>{token.fname} </p>
+//             <p><b>Last name: </b>{token.lname} </p>
+//             <p><b>Email: </b>{token.email} </p>
+//             <p><b>Phone: </b>{token.phone} </p>
+//             <p><b>DOB: </b>{token.dob}</p>
+//         </div>
+//             <StudentPage
+//                        handleChange={handleChange}
+//                        handleSubmit={handleSubmit}
+//                        newquestion={newquestion}
+//                        questions={questions}
+//                        handleResponse={handleResponse}
+//                        handleSubmitRes={handleSubmitRes}
+//              ></StudentPage>
+//         </>
+//     );
+// };

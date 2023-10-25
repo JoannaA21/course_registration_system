@@ -88,22 +88,21 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Role />} />
-          <Route path="/login" element={<Login
-          // handleChange={handleChange}
-          // handleSubmit={handleSubmit}
-          // newquestion={newquestion}
-          // questions={questions}
-          />} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/adminlogin" element={<Login />} />
-          <Route path="/studentregistercourse" element={< StudentRegisterCourse />} />
+          <Route path="/StudentRegisterCourse" element={< StudentRegisterCourse />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/admin" element={<Admin 
-          // newquestion={newquestion}
-          // questions={questions}
-          // handleResponse={handleResponse}
-          // handleSubmitRes={handleSubmitRes}
+          newquestion={newquestion}
+          questions={questions}
+          handleResponse={handleResponse}
+          handleSubmitRes={handleSubmitRes}
           />} />
-          <Route path="/studentinfo" element={<StudentInformation />} />
+          <Route path="/studentinfo" element={<StudentInformation 
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          newquestion={newquestion}
+          questions={questions} />} />
           <Route path="/logout" element={<Logout />} />
 
 
