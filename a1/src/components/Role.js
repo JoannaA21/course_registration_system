@@ -16,9 +16,9 @@ export const Role = () => {
     return(
     <>
     <div className="role-component">
-        <h1>Log in</h1>
+        <h1>LOGIN AS</h1>
             <div className="role">
-                <h2>I am</h2>
+                {/* <h2>AS</h2> */}
                 <button type="button" onClick={StudentPath}>a Student</button>
                 <button type="button" onClick={AdminPath}>an Admin</button>
             </div>

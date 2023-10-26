@@ -4,7 +4,7 @@
 
 .RegisterStudent-component {
   background-image: linear-gradient(to right, rgba(255,255,255, 0.5) 0 100%), url(./BVC.png);
-  height: 110vh; 
+  height: 107.5vh; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,7 +34,7 @@
     margin-bottom: 15px;
   }
   
-  .RegisterStudent-component form input[type=text], input[type=number], input[type=password]{
+  .RegisterStudent-component form input[type=text], input[type=number], input[type=password], input[type=date]{
     display: block;
     height: 32px;
     padding: 6px 16px;
@@ -53,7 +53,7 @@
     font-size: small;
   }
   
-  
+   
   /* .RegisterStudent-component  form button[type=submit] {
   width: 200px;
 	height: 50px;
@@ -98,5 +98,31 @@
     transition: all .3s ease;
     background-color: rgba(20, 20, 20, 0.8);
     color: white;
+  }
+}
+
+.alreadyHaveAnAccount{
+  /* background-color: #a0aab0; */
+  color: rgba(256,256,256,0.5);
+  color:#a0aab0;
+  border: 0;
+  border-radius: 100px;
+  text-align: center;
+  width: 120px;
+  text-decoration: none;
+  margin: 20px auto;
+  margin-left: 25px;
+  padding: 7px 7px;
+  cursor: pointer;
+  visibility: visible;
+  text-transform: uppercase;
+
+  &:hover {
+    /* transition: all .3s ease; */
+    /* background-color: rgba(20, 20, 20, 0.8); */
+    background-color: black;
+    color: white;
+    line-break: normal;
+    margin-top: 20px;
   }
 }

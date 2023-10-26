@@ -4,7 +4,7 @@
 
 .role-component{
   background-image: linear-gradient(to right, rgba(255,255,255, 0.5) 0 100%), url(./BVC.png);
-  height: 100vh; 
+  height: 94vh; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -30,7 +30,8 @@
 
 .role h2{
     text-align: center;
-    color: white;
+    color: #FF6969;
+    font-size: 30px;
 }
 
 .role-component button[type=button] {

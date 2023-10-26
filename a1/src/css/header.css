@@ -1,7 +1,7 @@
 
 .navbar {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #333;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     padding: 20px 0; 
     position: relative;
     display: flex;
@@ -29,16 +29,20 @@
 
 .nav-link {
     text-decoration: none;
-    color: #333;
+    color: white;
     font-weight: 600;
     transition: color 0.3s;
+    margin: 0 10px;
     &:hover {
-        color: #007BFF;
+        background-color: white;
+        color: black;
+        padding: 7px ;
+        border-radius: 100px;
     }
 }
 
 /* Addbottom border animation on hover */
-.nav-item::after {
+/* .nav-item::after {
     content: "";
     display: block;
     position: absolute;
@@ -50,7 +54,7 @@
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s;
-}
+} */
 
 .nav-item:hover::after {
     transform: scaleX(1);
