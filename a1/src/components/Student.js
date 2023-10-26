@@ -5,6 +5,8 @@ import SearchCourse from './SearchCourse';
 import ContactForm from "./ContactForm";
 import Response from './Response';
 import StudentPage from "./StudentPage";
+import StudentHeader from './studentNav'
+import '../css/student.css'
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
@@ -76,6 +78,8 @@ export const StudentRegisterCourse = () => {
 
     return (
         <>
+            <div className="Student_info_body">
+            <StudentHeader/>
             <SearchCourse
                 searchCourse={studentSearch}
                 setSearch={setStudentSearch}
@@ -89,7 +93,7 @@ export const StudentRegisterCourse = () => {
                 handleRegister={handleRegister}
             /> */}
 
-            <h2 className="admin-subTitle">Courses</h2>
+            <h2 className="studentInfo_label">Courses</h2>
 
             {filteredCoursesAvailable.length ? (
                 <Course
@@ -103,6 +107,7 @@ export const StudentRegisterCourse = () => {
             )}
 
             {/* <ContactForm></ContactForm> */}
+            </div>
         </>
     );
 };
@@ -112,7 +117,6 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
     const token = JSON.parse(localStorage.getItem('loggedIn'));
     if (!token) window.location.href = 'login';
 
-    //
     const getCourse = JSON.parse(localStorage.getItem('course'));
     if (getCourse) {
         getCourse.forEach(e => {
@@ -151,6 +155,7 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
         saveAndSetRegisteredCourses(updatedRegisteredCourse);
     };
 
+    //handleDrop
     const handleDrop = (courseid) => {
         const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.id && c.courseid === courseid));
         saveAndSetRegisteredCourses(updatedRegisteredCourse);
@@ -166,23 +171,30 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
         );
     });
 
-    //handleDrop
     return (
         <>
-            <h2 className="admin-subTitle">My Information</h2>
-            <div>
-                <h2>{token.role}</h2>
-                <p><b>Program: </b>{token.program} </p>
-                <p><b>Department: </b>{token.department} </p>
-                <p><b>Username: </b> {token.username}</p>
-                <p><b>First name: </b>{token.fname} </p>
-                <p><b>Last name: </b>{token.lname} </p>
-                <p><b>Email: </b>{token.email} </p>
-                <p><b>Phone: </b>{token.phone} </p>
-                <p><b>DOB: </b>{token.dob}</p>
-            </div>
+        <StudentHeader/>
+            <div className="Student_info_body">
+                <div className="main">
+                    {/* <h2 className="student-subTitle">My Information</h2> */}
+                    <h2 className="studentInfo_label">My Information</h2>
+                        <div className="card">
+                            <div className="student_card_body">
+                            <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" />
+                                <h2 className="studentInfo_label">I am a {token.role}</h2>
+                                <p className="info"><b>Program: </b>{token.program} </p>
+                                <p className="info"><b>Department: </b>{token.department} </p>
+                                <p className="info"><b>Username: </b> {token.username}</p>
+                                <p className="info"><b>First name: </b>{token.fname} </p>
+                                <p className="info"><b>Last name: </b>{token.lname} </p>
+                                <p className="info"><b>Email: </b>{token.email} </p>
+                                <p className="info"><b>Phone: </b>{token.phone} </p>
+                                <p className="info"><b>DOB: </b>{token.dob}</p>
+                            </div>
+                        </div>
+                </div>
 
-            <h2 className="admin-subTitle">My Courses</h2>
+            <h2 className="studentInfo_label" id="myCourses">My Courses</h2>
             {/* <Course
                 courses={search.filter(rcourse =>
                     rcourse.course.code
@@ -200,10 +212,12 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                     handleExchange={handleExchange}
                 />
             ) : (
-                <p className="no-avail">You are not registered in any courses</p>
+                <div className="no-avail-container">
+                    <p className="no-avail">You are not registered in any courses</p>
+                </div>
             )}
 
-            <h2 className="admin-subTitle">Have a Question? </h2>
+            <h2 className="studentInfo_label" id="contact">Have a Question? </h2>
 
             <ContactForm
                 role="student"
@@ -214,12 +228,13 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                 questions={questions}
             />
 
-            <h2 className="admin-subTitle">Queries</h2>
+            <h2 className="studentInfo_label">Queries</h2>
 
 
             <Response
                 questions={questions}
             />
+            </div>
 
         </>
     );

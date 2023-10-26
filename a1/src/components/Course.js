@@ -29,6 +29,7 @@ const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExcha
 
     // Maps through all the courses data and displays them
     return (
+        <div className="courseContainer">
         <div className="courseGrid">
             {courses.map((course) => {
                 // Check if the student is registered in the current course
@@ -57,6 +58,7 @@ const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExcha
                     </li>
                 );
             })}
+        </div>
         </div>
     );
 };

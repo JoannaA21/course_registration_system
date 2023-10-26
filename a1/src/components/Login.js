@@ -123,7 +123,7 @@ export const Login = () => {
                         <button type="submit" onClick={handleSubmitForStudent}>Log In</button>
 
                         <a href="/registration" className="noAccount">Don't have an account?</a>
-                        <a href="/adminlogin" className="noAccount">an Admin?</a>
+                        <a href="/" className="clickedWrongRole">Not a Student?</a>
                     </form>
                 </div>
             </>
@@ -138,7 +138,7 @@ export const Login = () => {
                         <input type='text' className="vsbl" onChange={handleChangeForAdmin} name='username' placeholder='Username' />
                         <input type='password' onChange={handleChangeForAdmin} name='password' placeholder='Password' />
                         <button type="submit" onClick={handleSubmitForAdmin}>Log In</button>
-                        <a href="/login" className="noAccount">a Student?</a>
+                        <a href="/" className="clickedWrongRole">Not an Admin?</a>
                     </form>
                 </div>
             </>

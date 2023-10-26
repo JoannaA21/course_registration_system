@@ -116,7 +116,7 @@ const filteredCourses = courses.filter(course =>
     return (
         <div className="adminpage">
 
-            <h2 className="Admin-page-Title">Admin Page</h2>
+            <h2 className="Admin-page-Title">Admin Page</h2> 
            
             <SearchCourse
             searchCourse = {searchCourse}
@@ -144,7 +144,9 @@ const filteredCourses = courses.filter(course =>
                     handleDelete={handleDelete}
                 />
             ) : (
-                <p  className="no-avail">No courses were found</p>
+              <div className='no-avail-container'>
+                <p  className="no-avail" style={{'margin-left':'6em'}}>No courses were found</p>
+              </div>
             )}
 
             <h2 className="admin-subTitle">Questions by Students </h2>

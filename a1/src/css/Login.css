@@ -34,7 +34,8 @@
   height: 40px;
   padding: 6px 16px;
   width: 100%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
+  border:none;
   background-color: #f3f3f3;
   margin-top: 10px;
   border-radius: 100px;
@@ -64,13 +65,13 @@
   color:#192655;
 } */
 
-.Login  form button[type=submit] {
+.Login form button[type=submit] {
   background-color: #a0aab0;
   color: rgba(256,256,256,0.5);
   border:0;
   border-radius: 100px;
   display: block;
-  margin: 15px auto 50px; 
+  margin: 15px auto 30px; 
   padding: 15px 45px;
   width: 170px;
   font-size: 17px;
@@ -79,10 +80,10 @@
   visibility: visible;
   text-transform: uppercase;
   letter-spacing: 3px;
-  -webkit-transition: all .3s ease;
+  /* -webkit-transition: all .3s ease; */
 
   &:hover {
-    transition: all .3s ease;
+    /* transition: all .3s ease; */
     /* background-color: rgba(20, 20, 20, 0.8); */
     background-color: black;
     color: white;
@@ -90,13 +91,6 @@
   }
 }
 
-
-.ORregister{
-  text-decoration: none;
-  color: grey;
-  /* text-align: center; */
-margin: 0 auto;
-}
 
 .noAccount{
   /* background-color: #a0aab0; */
@@ -107,7 +101,7 @@ margin: 0 auto;
   text-align: center;
   width: 120px;
   text-decoration: none;
-  margin: 10px auto;
+  margin: 10px auto 40px;
   padding: 7px 7px;
   cursor: pointer;
   visibility: visible;
@@ -120,5 +114,27 @@ margin: 0 auto;
     color: white;
     line-break: normal;
     margin-top: 20px;
+  }
+}
+
+.clickedWrongRole{
+  color: rgba(256,256,256,0.5);
+  color:#a0aab0;
+  border: 0;
+  border-radius: 100px;
+  text-align: center;
+  width: 120px;
+  text-decoration: none;
+  margin: 10px 40px;
+  padding: 7px;
+  cursor: pointer;
+  visibility: visible;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: black;
+    color: white;
+    line-break: normal;
+    /* margin-top: 20px; */
   }
 }

@@ -101,7 +101,9 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
         </div>
       ))
     ) : (
-      <p>All Questions have been answered</p>
+      <div className='noQuestionFromStudent-container'>
+        <p className='noQuestionFromStudent'>All Questions have been answered</p>
+      </div>
     )}
   </div>
     )

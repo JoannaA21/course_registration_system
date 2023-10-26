@@ -21,7 +21,7 @@
   .ContactFormStudent .FormTitle {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #007BFF;
+    color: #0D1282;
   }
   
   .ContactFormStudent .form-content {
@@ -50,18 +50,19 @@
   }
   
   .ContactFormStudent .SubmitButton {
-    background-color: #007BFF;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 10px 20px;
-    border: none;
-    border-radius: .25rem;
+    border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 16px;
+    margin-left: 40%;
   }
   
   .ContactFormStudent .SubmitButton:hover {
-    background-color: #0056b3;
+    background-color: #0D1282;
+    color: white;
   }
 
 

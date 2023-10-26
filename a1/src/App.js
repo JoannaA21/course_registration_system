@@ -10,7 +10,7 @@ import { Role } from './components/Role';
 import { Login } from './components/Login';
 import { StudentRegisterCourse, StudentInformation } from './components/Student';
 import { Admin } from "./components/Admin";
-import Header from './components/common/Header';
+//import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import {Logout} from './components/common/Logout';
 import './index.css';
@@ -85,7 +85,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header />
+       {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Role />} />
           <Route path="/login" element={<Login/>} />
