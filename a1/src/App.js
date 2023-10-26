@@ -14,6 +14,7 @@ import { Admin } from "./components/Admin";
 import Footer from './components/common/Footer';
 import {Logout} from './components/common/Logout';
 import './index.css';
+import { Error } from './components/Error'
 
 function App() {
 
@@ -106,7 +107,7 @@ function App() {
           questions={questions} />} />
 
           <Route path="/logout" element={<Logout />} />
-
+          <Route path="*" element={<Error/>}/> 
 
           {/* <Route path="/courseRegistrations" element={<CourseRegistrationPage />} /> */}
           {/* <Route path="/admin" element={<AdminLoginPage />} />

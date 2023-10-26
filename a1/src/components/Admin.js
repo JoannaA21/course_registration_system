@@ -11,6 +11,11 @@ import { v4 as uuidv4 } from 'uuid';
 export const Admin = ({newquestion,handleResponse,handleSubmitRes, questions}) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'))
     if (!token) window.location.href = 'adminlogin'
+    else if (token.role !== 'admin') {
+        alert("You are not an admin");
+        // window.history.back();
+        window.location.href = 'studentinfo'
+    }
 
 //function for local storage remaining mb
 function getLocalStorageSize() {

@@ -15,13 +15,13 @@ function StudentHeader() {
                 <Link to="/studentinfo" className="nav-link">Home</Link>
               </li>
               <li className="nav-item">
-                <a href="#myCourses" className="nav-link">My Courses</a>
+                <a href="/studentinfo#myCourses" className="nav-link">My Courses</a>
               </li>
               <li className="nav-item">
                 <Link to="/studentregistercourse" className="nav-link">Add courses</Link>
               </li>
               <li className="nav-item">
-                <a href="#contact" className="nav-link">Ask Question</a>
+                <a href="/studentinfo#contact" className="nav-link">Ask Question</a>
               </li>
               <li className="nav-item">
                 <Link to="/logout" className="nav-link">Log out</Link>
