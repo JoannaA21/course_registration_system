@@ -25,7 +25,7 @@ const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExcha
                         {/* {handleDelete ? <button className="displayCourseRegister" onClick={() => handleDelete(course.id)}>Delete</button> : null} */}
                         {/* {handleRegister ? <button className="displayCourseRegister" id={`courseRegister-${course.id}`} onClick={() => handleRegister(course)}>Register</button> : null} */}
                         {handleExchange ? <button className="displayCourseRegister" onClick={() => handleExchange(course)}>Exchange</button> : null}
-                        {handleCancelExchange ? <button className="displayCourseRegister" onClick={() => handleCancelExchange(course)}>Cancel</button> : null}
+                        {handleCancelExchange ? <button className="displayCourseRegister displayCourseToCancel" onClick={() => handleCancelExchange(course)}>Cancel</button> : null}
                         {/* {handleDrop ? <button className="displayCourseRegister" onClick={() => handleDrop(course)}>Drop</button> : null} */}
                         {handleDelete && <button className="displayCourseRegister displayCourseDelete" onClick={() => handleDelete(course.id)}>Delete</button>}
                         {isRegistered ? (

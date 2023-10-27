@@ -221,7 +221,8 @@ button.btnAdd:hover {
   }
 
   .displayCourseDelete:hover,
-  .displayCourseDrop:hover{
+  .displayCourseDrop:hover,
+  .displayCourseToCancel:hover{
     background-color: red;
     color: white;
   }
