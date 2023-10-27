@@ -9,6 +9,8 @@ const Response = ({questions}) => {
 
     return (
         <>
+        {myansweredquestions.length === 0 ? null: <h2 className="studentInfo_label">Queries</h2>} 
+
         {myansweredquestions.length > 0 && (
                 <div className="response-container">
                     <h2 className="FormTitle">My Queries</h2>
