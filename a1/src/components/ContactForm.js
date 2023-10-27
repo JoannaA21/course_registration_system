@@ -1,12 +1,14 @@
-export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,newquestion, questions,handleSubmitRes}) => {
+import { useRef } from 'react'
 
+export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,newquestion, questions,handleSubmitRes}) => {
+    const inputRef = useRef();
     const user = JSON.parse(localStorage.getItem('loggedIn'));
 
     //{if (user.role == "student"){
-    {if (role == "student"){
+    {if (role ==="student"){
         return (
             <div className="containerForContact">
-                <form className="ContactFormStudent" onSubmit={handleSubmit}>
+                <form className="ContactFormStudent" onSubmit={(e) => handleSubmit(e,`${user.fname} ${user.lname}`, user.email)}>
                     <h2 className="FormTitle">Ask a Question</h2>
                     <div className="form-content">
                         <div className="form-row">
@@ -15,9 +17,9 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
                             type="text"
                             id="name"
                             name="name"
-                            value={newquestion.name}
+                            value={user.fname +" "+user.lname}
                             placeholder="Full Name"
-                            onChange={handleChange}
+                            disabled
                             />
                         </div>
                         <div className="form-row">
@@ -26,9 +28,8 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
                             type="email"
                             name="email"
                             id="email"
-                            value={newquestion.email}
-                            onChange={handleChange}
-                            required
+                            value={user.email}
+                            disabled
                             placeholder="Email Address"
                             />
                         </div>
@@ -42,17 +43,19 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
                             placeholder="Your Question"
                             value={newquestion.query}
                             onChange={handleChange}
+                            autoFocus
+                            ref={inputRef}
                             ></textarea>
                         </div>
                         <div className="form-row">
-                            <button type="submit" className="SubmitButton">Submit</button>
+                            <button type="submit" className="SubmitButton" onClick={() => inputRef.current.focus()}>Submit</button>
                          </div>
                     </div>
                 </form>
       </div>
     );
-    }else if(user.role == "admin"){
-    // }else if(role == "admin"){
+    }else if(user.role === "admin"){
+    // }else if(role === "admin"){
     const unansweredQuestions = questions.filter((q) => !q.isanswered);
 
     return (
@@ -79,21 +82,23 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
           </div>
           <form className="displayAdminForm" onSubmit={(e) => handleSubmitRes(q.id)}>
             <div className="form-row">
-              <label htmlFor="adminAnswer" className="displayAdminLabel">
+              <label htmlFor={`adminAnswer-${q.id}`} className="displayAdminLabel">
                 Admin Response
               </label>
               <textarea
-                id="adminAnswer"
+                id={`adminAnswer-${q.id}`}
                 name="response"
                 cols="50"
                 rows="6"
                 placeholder="Response"
-                value={newquestion.response}
-                onChange={handleResponse}
+                value={newquestion[q.id]?newquestion[q.id].response:""}
+                onChange={(e) => handleResponse(e, q.id)}
+                autoFocus
+                ref={inputRef}
               ></textarea>
             </div>
             <div className="form-row">
-              <button type="submit" className="displayAdminButton">
+              <button type="submit" className="displayAdminButton" onClick={() => inputRef.current.focus()}>
                 Respond
               </button>
             </div>
@@ -101,7 +106,7 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
         </div>
       ))
     ) : (
-      <div className='noQuestionFromStudent-container'>
+        <div className='noQuestionFromStudent-container'>
         <p className='noQuestionFromStudent'>All Questions have been answered</p>
       </div>
     )}

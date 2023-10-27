@@ -19,16 +19,15 @@ import { Error } from './components/Error'
 function App() {
 
   const token = JSON.parse(localStorage.getItem('loggedIn'))
-    // if (!token) window.location.href = 'adminlogin'
 
   const [questions, setQuestion] = useState(JSON.parse(localStorage.getItem('questions')) || []);
 
   const initialData = {
-    isanswered:false,
-    query:''
+          isanswered:false,
+          query:''
   }
-  const [newquestion, setNewQuestion] = useState(initialData);
-  
+  const [newquestion, setNewQuestion] = useState({});
+
 
   const handleChange = (e)=> {
     const name = e.target.name;
@@ -37,51 +36,53 @@ function App() {
       ({...curQuestion, [name]: value}));   
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
-    const studid = token.id
-    // const studid = 3;
-    const newquestionItem = { studid,id, ...newquestion };
-    const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];;
-    setQuestion(updatedQuestion);
-    alert('Your question is sent!')
-    localStorage.setItem('questions', JSON.stringify(updatedQuestion));
-    setNewQuestion({isanswered: false, query:""});
+  const handleSubmit = (e, name, email) => {
+      e.preventDefault()
+      const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
+      const studid = token.id
+      const newquestionItem = { studid,id,name,email, ...newquestion };
+      const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];;
+      setQuestion(updatedQuestion);
+      alert('Your question is sent!')
+      localStorage.setItem('questions', JSON.stringify(updatedQuestion));
+      setNewQuestion({isanswered: false, query:""});
   }
 
 
-  const handleResponse = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setNewQuestion((curQuestion)=> 
-    ({...curQuestion, [name]: value})); 
-  }
+  const handleResponse = (e, id) => {
+      const name = e.target.name;
+      const value = e.target.value;
+      setNewQuestion((curQuestion)=> 
+      ({
+        ...curQuestion, 
+        [id]: { ...curQuestion[id], [name]: value },
+      }));
+  };
 
 
   const handleSubmitRes = (id) => {
-    // e.preventDefault();
-
-  // Find the question with the matching id
+      // Find the question with the matching id
     const updatedQuestions = questions.map((question) => {
-      if (question.id === id) {
-        return {
-          ...question,
-          isanswered: true,
-          response: newquestion.response, 
-      };
-    }
-    return question;
-    });
+        if (question.id === id) {
+            return {
+              ...question,
+              isanswered: true,
+              response: newquestion[id] ? newquestion[id].response : "",
+          };
+        }
+        return question;
+        });
 
- 
     setQuestion(updatedQuestions);
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
-    setNewQuestion({ isanswered: false, query: '', response: '' });
+
+    setNewQuestion((prevNewQuestions) => ({
+        ...prevNewQuestions,
+        [id]: { isanswered: false, response: "" },
+    }));
+    
     alert('Your response is sent!');
-
-    }
-
+  }
 
   return (
     <Router>

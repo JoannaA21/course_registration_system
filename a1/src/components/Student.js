@@ -233,9 +233,6 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                     questions={questions}
                 />
 
-                <h2 className="studentInfo_label">Queries</h2>
-
-
                 <Response
                     questions={questions}
                 />
