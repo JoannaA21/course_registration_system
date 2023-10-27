@@ -8,7 +8,8 @@
 .adminpage{
   /* background-color: #F5F7F8; */
   background-image: linear-gradient(to right, rgba(255,255,255, 0.8) 0 100%), url(./BVC.png);
-  height: 100vh; 
+  height: auto;
+  min-height: 95vh; 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

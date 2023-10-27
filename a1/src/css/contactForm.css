@@ -77,13 +77,13 @@
     width: 100%;
     text-align: left;
     font-family: 'Roboto', sans-serif;
-    margin: 3rem auto;
+    margin: auto;
   }
   
   .response-container .FormTitle {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #007BFF;
+    color: #0D1282;
   }
   
   .answered-question {

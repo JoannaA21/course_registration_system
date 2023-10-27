@@ -16,7 +16,7 @@
 }
 
 .displayAdminHeader {
-  background-color: #4287f5;
+  background-color: #0D1282;
   color: white;
   padding: 1rem;
   border-top-left-radius: 10px;
@@ -49,11 +49,11 @@
   align-items: center;
   height: 48px;
   width: 150px;
-  border-radius: 0.25rem;
+  border-radius: 100px;
   padding: 0.5rem;
   font-size: 1rem;
-  background-color: #4287f5;
-  color: white;
+  background-color: white;
+  color: black;
   cursor: pointer;
   margin: 1rem auto;
   transition: background-color 0.3s, color 0.3s;
@@ -61,6 +61,7 @@
 
 .displayAdminButton:hover,
 .displayAdminButton:focus {
-  background-color: #326fb8;
+  background-color: #0D1282;
+  color: white;
   outline: none;
 }
