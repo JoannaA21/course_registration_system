@@ -1,6 +1,6 @@
-*{
+/* *{
     margin: 0;
-}
+} */
 
 .role-component{
   background-image: linear-gradient(to right, rgba(255,255,255, 0.5) 0 100%), url(./BVC.png);

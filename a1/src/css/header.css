@@ -1,12 +1,14 @@
 
 .navbar {
-    background-color: #333;
+    background-color:darkblue;
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    padding: 20px 0; 
+    padding-top: 10px;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     font-family: 'Roboto', sans-serif;
+    height: 40px;
+    width: auto;
 }
 
 /*Center Nav bar*/
@@ -36,8 +38,8 @@
     &:hover {
         background-color: white;
         color: black;
-        padding: 7px ;
-        border-radius: 100px;
+        padding: 1px ;
+        border-radius: .30rem;
     }
 }
 
@@ -65,4 +67,10 @@
 }
 .nav-item:last-child .nav-link:hover {
     color: #FF5555;
+}
+
+.BVCheaderlogo{
+    width: auto;
+    height: 30px;
+    margin-right: 750px;
 }

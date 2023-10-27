@@ -125,7 +125,7 @@
   text-align: center;
   width: 120px;
   text-decoration: none;
-  margin: 10px 40px;
+  margin: 40px 40px;
   padding: 7px;
   cursor: pointer;
   visibility: visible;
@@ -135,6 +135,6 @@
     background-color: black;
     color: white;
     line-break: normal;
-    /* margin-top: 20px; */
+    margin-top: 40px;
   }
 }
