@@ -128,7 +128,7 @@ export const StudentRegisterCourse = () => {
 export const StudentInformation = ({ handleChange, handleSubmit, newquestion, questions, handleResponse, handleSubmitRes }) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'));
     if (!token) window.location.href = 'login';
-    else if (token.role === 'admin') window.location.href = 'admin'
+   else if (token.role === 'admin') window.location.href = 'admin'
 
     const getCourse = JSON.parse(localStorage.getItem('course'));
     if (getCourse) {

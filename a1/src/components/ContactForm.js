@@ -88,7 +88,7 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
               <textarea
                 id={`adminAnswer-${q.id}`}
                 name="response"
-                cols="50"
+                cols="40"
                 rows="6"
                 placeholder="Response"
                 value={newquestion[q.id]?newquestion[q.id].response:""}

@@ -6,6 +6,8 @@ import "../css/admin.css"
 import {CourseList} from './adminData'
 import ContactForm from "./ContactForm"
 import { v4 as uuidv4 } from 'uuid';
+import BVCLogo from "../css/BVCLogo.png"
+
 
 
 export const Admin = ({newquestion,handleResponse,handleSubmitRes, questions}) => {
@@ -118,10 +120,35 @@ const filteredCourses = courses.filter(course =>
   course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
   course.title.toLowerCase().includes(searchCourse.toLowerCase())
 );
-    return (
-        <div className="adminpage">
 
-            <h2 className="Admin-page-Title">Admin Page</h2> 
+//logout
+const logout = () => {
+  localStorage.removeItem('loggedIn')
+  alert('Log out successfully!')
+  window.location.href = '/'
+}
+    return (
+      <div className="adminpage">
+
+     <nav className="navbar">
+        <div className="container">
+            <ul className="navbar-nav">
+              <li>
+              <img src={BVCLogo} className='BVCheaderAdmin'></img>
+              </li>
+              <li>
+                <p>Logged in as: {token.username}</p>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" onClick={logout}>Log out</a>
+        
+              </li>
+            </ul>
+          </div>
+      </nav>
+
+
+
            
             <SearchCourse
             searchCourse = {searchCourse}
