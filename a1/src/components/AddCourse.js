@@ -61,7 +61,7 @@ const AddCourse = ({handleSubmit, handleChange, newCourse}) => {
                         </tr>
                         <tr>
                             <td>
-                                <label htmlFor="enddate" className="courseFormLabel">Course Start Date</label>
+                                <label htmlFor="enddate" className="courseFormLabel">Course End Date</label>
                             </td>
                             <td>
                                 <input

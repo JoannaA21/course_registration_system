@@ -137,10 +137,10 @@ const logout = () => {
               <img src={BVCLogo} className='BVCheaderAdmin'></img>
               </li>
               <li>
-                <p>Logged in as: {token.username}</p>
+                <p className="loggedInAs">Logged in as: {token.username}</p>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={logout}>Log out</a>
+                <a className="nav-link logoutAdmin" onClick={logout}>Log out</a>
         
               </li>
             </ul>

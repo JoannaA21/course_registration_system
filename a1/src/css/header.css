@@ -1,13 +1,14 @@
 
 .navbar {
-    background-color:darkblue;
+    /* background-color:darkblue; */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    background-color: rgb(231, 230, 230);
     padding-top: 10px;
     position: relative;
     display: flex;
     justify-content: end;
     font-family: 'Roboto', sans-serif;
-    height: 40px;
+    height: 50px;
     width: auto;
 }
 
@@ -29,20 +30,31 @@
     position: relative;
 }
 
-.nav-link {
+.studNav {
     text-decoration: none;
-    color: white;
+    color: #0D1282;
     font-weight: 600;
     transition: color 0.3s;
     margin: 0 10px;
-    &:hover {
-        background-color: white;
+    /* &:hover::after {
+        background-color: lightgray;
         color: black;
-        padding: 1px ;
+        padding: 28px 3px ;
         border-radius: .30rem;
-    }
+        border-bottom: 3px solid #0D1282;
+    } */
 }
-
+.studNav::after {
+    display: block;
+    content: '';
+    border-bottom: solid 5px #0D1282;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    margin-top: 3px;
+  }
+  .studNav:hover::after {
+    transform: scaleX(1);
+  }
 /* Addbottom border animation on hover */
 /* .nav-item::after {
     content: "";
@@ -56,21 +68,21 @@
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s;
-} */
-
-.nav-item:hover::after {
-    transform: scaleX(1);
 }
 
-.nav-item:last-child .nav-link {
+ .nav-item:hover::after {
+    transform: scaleX(1);
+} */
+
+/* .nav-item:last-child .nav-link {
     color: #FF0000;
 }
 .nav-item:last-child .nav-link:hover {
     color: #FF5555;
-}
+} */ 
 
 .BVCheaderlogo{
-    width: auto;
-    height: 30px;
-    margin-right: 550px;
+    width: 200px;
+    height: 50px;
+    margin-right: 525px;
 }

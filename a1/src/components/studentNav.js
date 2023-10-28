@@ -21,19 +21,19 @@ function StudentHeader() {
               <img src={BVCLogo} className='BVCheaderlogo'></img>
               </li>
               <li className="nav-item">
-                <Link to="/studentinfo" className="nav-link">Home</Link>
+                <Link to="/studentinfo" className="nav-link studNav">Home</Link>
               </li>
               <li className="nav-item">
-                <a href="/studentinfo#myCourses" className="nav-link">My Courses</a>
+                <a href="/studentinfo#myCourses" className="nav-link studNav">My Courses</a>
               </li>
               <li className="nav-item">
-                <Link to="/studentregistercourse" className="nav-link">Add courses</Link>
+                <Link to="/studentregistercourse" className="nav-link studNav">Add courses</Link>
               </li>
               <li className="nav-item">
-                <a href="/studentinfo#contact" className="nav-link">Ask Question</a>
+                <a href="/studentinfo#contact" className="nav-link studNav">Ask Question</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={logout}>Log out</a>
+                <a className="nav-link studNav" onClick={logout}>Log out</a>
         
               </li>
             </ul>
