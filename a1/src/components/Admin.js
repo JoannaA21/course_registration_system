@@ -7,6 +7,7 @@ import {CourseList} from './adminData'
 import ContactForm from "./ContactForm"
 import { v4 as uuidv4 } from 'uuid';
 import BVCLogo from "../css/BVCLogo.png"
+import { StudentUsers } from './adminData';
 
 
 
@@ -134,7 +135,7 @@ const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStora
 // registered student courses
 const filteredCoursesRegistered = courses.filter((course) => {
   const isRegistered = registeredCourses.some((c) => c.courseid === course.id);
-  
+
   return (
       isRegistered &&
       (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
@@ -160,8 +161,6 @@ const filteredCoursesRegistered = courses.filter((course) => {
             </ul>
           </div>
       </nav>
-
-
 
            
             <SearchCourse
@@ -200,7 +199,7 @@ const filteredCoursesRegistered = courses.filter((course) => {
 {filteredCoursesRegistered.length ? (
     <Course
         courses={filteredCoursesRegistered}
-        studentDetails={handleDelete}
+        studentDetails={registeredCourses}
     />
 ) : (
     <div className="no-avail-container">
