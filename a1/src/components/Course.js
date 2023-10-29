@@ -1,8 +1,11 @@
-
+import { StudentUsers } from './adminData';
 // export default Course;
-const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExchange, registeredCourses, handleCancelExchange }) => {
+const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExchange, registeredCourses, handleCancelExchange, studentDetails }) => {
     // Get the data of the user logged in
     const data = JSON.parse(localStorage.getItem('loggedIn'));
+    // get student details
+    const studDetail = JSON.parse(localStorage.getItem('course'));
+    const studentData = JSON.parse(localStorage.getItem('studentdata') || JSON.stringify(StudentUsers));
 
     // Maps through all the courses data and displays them
     return (
@@ -17,6 +20,7 @@ const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExcha
                         <div className="displayCourseHeader displayCourseHeaderBackground">
                             {course.code || course.course.code} : {course.title || course.course.title}
                         </div>
+                        {studentDetails ? (<p className="displayCourseDetails">Student ID : 2027 <br/> <br/> Student Name: John Doe <br/><br/> Email: JD123@bvc.ca</p>) : null}
                         <p className="displayCourseDetails">Course Start Date : {course.startdate || course.course.startdate}</p>
                         <p className="displayCourseDetails">Course End Date :  {course.enddate || course.course.enddate}</p>
                         <p className="displayCourseDetails">Course Schedule : {course.days || course.course.days}</p>

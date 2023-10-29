@@ -127,6 +127,20 @@ const logout = () => {
   alert('Log out successfully!')
   window.location.href = '/'
 }
+
+//Define a State to store all Courses a student is registeres in
+const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+   
+// registered student courses
+const filteredCoursesRegistered = courses.filter((course) => {
+  const isRegistered = registeredCourses.some((c) => c.courseid === course.id);
+  
+  return (
+      isRegistered &&
+      (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
+          course.title.toLowerCase().includes(searchCourse.toLowerCase()))
+  );
+});
     return (
       <div className="adminpage">
 
@@ -180,6 +194,19 @@ const logout = () => {
                 <p  className="no-avail" style={{'margin-left':'6em'}}>No courses were found</p>
               </div>
             )}
+
+<h2 className="studentInfo_label" id="myCourses">Registered Student Courses</h2>
+
+{filteredCoursesRegistered.length ? (
+    <Course
+        courses={filteredCoursesRegistered}
+        studentDetails={handleDelete}
+    />
+) : (
+    <div className="no-avail-container">
+        <p className="no-avail">No student is registered for any courses</p>
+    </div>
+)}
 
             <h2 className="admin-subTitle">Questions by Students </h2>
             <ContactForm

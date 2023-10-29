@@ -19,6 +19,24 @@ export const StudentRegisterCourse = () => {
     const [newCourse, setNewCourse] = useState({});
     const handleRegister = (course) => {
         const studId = { id: token.id, courseid: course };
+        // compare registered course if any conflicts on enrolling course
+        // console.log(registeredCourses)
+        // console.log('map')
+        // const isConflict = false;
+        // registeredCourses.forEach(c=> {
+        //     console.log(c.courseid)
+        //     courses.forEach(course =>{
+        //         if (course.id === c.courseid){
+        //             console.log('okay')
+        //             console.log(course.starttime)
+        //             console.log(course.endtime)
+        //             const st = course.starttime
+        //             const et = course.endtime
+        //             if 
+        //         }
+        //     })
+        // })
+        // end
 
         if (exchangecourses && exchangecourses.id === token.id) {
             const exchange = JSON.parse(localStorage.getItem('course'));
@@ -37,7 +55,7 @@ export const StudentRegisterCourse = () => {
         }
 
         window.location.href = 'studentinfo';
-        const buttonElement = document.querySelector(`#courseContainer-${studId.course.id}`);
+        const buttonElement = document.querySelector(`#courseContainer-${studId.courseid.id}`);
         if (buttonElement) {
             buttonElement.style.display = 'none';
         }
@@ -194,6 +212,7 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                         <div className="student_card_body">
                             <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" />
                             <h2 className="studentInfo_label">I am a {token.role}</h2>
+                            <p className="info"><b>Student ID: </b>{token.id} </p>
                             <p className="info"><b>Program: </b>{token.program} </p>
                             <p className="info"><b>Department: </b>{token.department} </p>
                             <p className="info"><b>Username: </b> {token.username}</p>
