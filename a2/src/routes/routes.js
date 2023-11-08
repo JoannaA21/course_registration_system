@@ -4,11 +4,25 @@ const studentUserController = require('../controllers/studentUserController');  
 const course = require('../controllers/courseController'); //import courseController
 const registeredCourse = require('../controllers/registeredCourseController')
 const contactForm = require('../controllers/contactFormController')
+const authenticateToken = require('../middleware/authenticateToken'); // import authenticateToken in middleware
+const isAdmin = require('../middleware/isAdmin'); // import isAdmin role in middleware
+const { login, verify, logout } = require('../controllers/authController');
 
+// Route for login
+router.post('/login', login);
+// Route for logout
+router.get('/logout', logout);
+// verify token
+router.get('/verify', verify);
 // Routes for create user 
 router.post('/signup', studentUserController.createStudent_user);
 // Routes for forgot password
 router.post('/forgot_passsword', studentUserController.forgotPassword);
+
+
+// Protected routes (All routed below are in need for token)
+router.use(authenticateToken);
+
 // Routes for get all users
 router.get('/studentuser/', studentUserController.getAllStudent_users);
 // Routes for get user by id
@@ -18,7 +32,7 @@ router.put('/studentuser/:id', studentUserController.updateStudent_user);
 // Route for delete user
 router.delete('/studentuser/:id', studentUserController.deleteStudent_user);
 //Route for creating course
-router.post('/createcourse', course.createCourse);
+router.post('/createcourse', isAdmin, course.createCourse); // added isAdmin for role
 //Route for accessing all courses
 router.get('/courses', course.getAllCourses);
 //Route for accessing specific course
