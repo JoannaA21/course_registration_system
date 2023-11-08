@@ -6,9 +6,9 @@ const SECRET_KEY = process.env.SECRET_KEY; // Replace with your actual secret ke
 
 const login = async (req, res, next) => {
   try {
-    const { identifier, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!identifier) {
+    if (!username) {
       return res.status(400).json({ message: 'Student username or email is required.' });
     }
 
@@ -20,14 +20,14 @@ const login = async (req, res, next) => {
       {"id":"5","fname":"Denis","lname":"Onu","username":"DO123","password":"DO123"},
     ];
 
-    const admin = validateAdmin.find(user => user.username === identifier && user.password === password);
+    const admin = validateAdmin.find(user => user.username === username && user.password === password);
     if (admin) {
-      console.log(`User with id ${identifier} exists: ${admin.username}`);
+      console.log(`User with id ${username} exists: ${admin.username}`);
 
       // Generate and send the JWT token on successful login
       const token = jwt.sign({
         userId: admin.id,
-        userOrEmail: identifier,
+        userOrEmail: username,
         role: 'admin',
         fname: admin.fname,
         lname: admin.lname
@@ -38,17 +38,13 @@ const login = async (req, res, next) => {
     // Find the user by checking both username and email
     const user = await Student_user.findOne({
       where: Sequelize.or(
-        { username: identifier }, // Check if the identifier matches the username field
-        { email: identifier } // Check if the identifier matches the email field
+        { username: username }, // Check if the username matches the username field
+        { email: username } // Check if the username matches the email field
       ),
     });
 
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or email.' });
-    }
-
-    if (!user.email_verification) {
-      return res.status(401).json({ message: 'Please verify your email.' });
     }
 
     const isPasswordValid = await user.verifyPassword(password);
@@ -59,7 +55,7 @@ const login = async (req, res, next) => {
     // Generate and send the JWT token on successful login
     const token = jwt.sign({
       userId: user.id,
-      userOrEmail: identifier,
+      userOrEmail: username,
       role: 'student',
       fname: user.fname,
       lname: user.lname,
