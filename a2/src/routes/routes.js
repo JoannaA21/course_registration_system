@@ -37,6 +37,8 @@ router.post('/createcourse', isAdmin, course.createCourse); // added isAdmin for
 router.get('/courses', course.getAllCourses);
 //Route for accessing specific course
 router.get('/getcourse/:courseCode', course.getCourse_byCourseCode);
+// Route for delete course
+router.delete('/course/:id', isAdmin, course.deleteCourse);
 //Route for student register for course
 router.post('/register', registeredCourse.studentRegister_ForACourse);
 //Route for student drop course

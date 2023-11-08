@@ -84,8 +84,25 @@ const createCourse = async (req, res, next) => {
       }
 }
 
+// Delete a course by ID
+const deleteCourse = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const course = await Course.findByPk(id);
+      if (!course) {
+        return res.status(404).json({ message: 'Course not found' });
+      }
+      await course.destroy();
+      console.log('Course has been deleted.');
+      res.status(200).json({message: 'Course has been deleted.'}).end();
+    } catch (err) {
+      next(err);
+    }
+  };
+
 module.exports = {
     getCourse_byCourseCode,
     getAllCourses,
-    createCourse
+    createCourse,
+    deleteCourse
 }
