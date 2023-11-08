@@ -3,6 +3,7 @@ const dbConfig = require('../config/dbConfig');
 
 //used to encryot password
 const bcrypt = require('bcrypt');
+const { getStudent_userById } = require('../controllers/studentUserController');
 
 //connect to the database
 const sequelize = dbConfig.connect();
@@ -44,17 +45,19 @@ const Student_user = sequelize.define(
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
+            unique: true, // Add unique constraint to the username field
             validate: {
-                isEmail: true, 
-                isUniqueEmail: async(value) => {
-                    const existingUser = await Student_user.findOne({where: {username:value}});
-                    if(existingUser){
-                        throw new Error ('Username already exists in the database.')
-                    }
+              notNull: { msg: 'Username cannot be null.' },
+              notEmpty: { msg: 'Username cannot be empty.' },
+              isUniqueUsername: async (value) => {
+                // Custom validation to check if the username is unique in the database
+                const existingUser = await Student_user.findOne({ where: { username: value } });
+                if (existingUser) {
+                  throw new Error('Username already exists in the database.');
                 }
-            }
-        },
+              },
+            },
+          },
         dob: {
             type: DataTypes.STRING,
             allowNull: false

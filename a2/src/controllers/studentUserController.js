@@ -1,4 +1,4 @@
-const Student_user = require('../models/users');
+const Student_user = require('../models/student');
 const { Sequelize } = require('sequelize');
 
 const timeElapsed = Date.now(); // get the date now
@@ -32,11 +32,11 @@ const getStudent_userById = async (req, res, next) => {
 
 // Create a new 
 const createStudent_user = async (req, res, next) => {
-  const { fname, lname, email, username, role, phone, password } = req.body;
+  const { fname, lname, email, username, phone, dob,
+    department, program, password } = req.body;
   try {
     created_at = today.toISOString();
     updated_at = today.toISOString();
-    const userRole = role || 'coworker';
 
     const user = await Student_user.create({ 
       fname,
@@ -44,9 +44,10 @@ const createStudent_user = async (req, res, next) => {
       email,
       username,
       phone,
-      role: userRole,
       password,
-      email_verification: 0,
+      dob,
+      department,
+      program,
       created_at, 
       updated_at
     });
