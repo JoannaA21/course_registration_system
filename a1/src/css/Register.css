@@ -1,0 +1,128 @@
+*{
+  margin: 0;
+}
+
+.RegisterStudent-component {
+  background-image: linear-gradient(to right, rgba(255,255,255, 0.5) 0 100%), url(./BVC.png);
+  height: 107.5vh; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.RegisterStudent-component form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #537188;
+    padding: 30px 50px 25px;
+    box-shadow: 1px 4px 10px 1px #aaa;
+    font-family: sans-serif;
+    border-radius: 20px;
+  }
+  
+  .RegisterStudent-component  form * {
+      box-sizing: border-box;
+  }
+  
+  .RegisterStudent-component form h1, h3{
+    text-align: center;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .RegisterStudent-component  form input {
+    margin-bottom: 15px;
+  }
+  
+  .RegisterStudent-component form input[type=text], input[type=number], input[type=password], input[type=date]{
+    display: block;
+    height: 32px;
+    padding: 6px 16px;
+    width: 100%;
+    border: none;
+    background-color: #f3f3f3;
+    border-radius: 100px;
+  }
+
+  .dob {
+    background-color: white;
+    color: grey;
+    height: 32px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: small;
+  }
+  
+   
+  /* .RegisterStudent-component  form button[type=submit] {
+  width: 200px;
+	height: 50px;
+	text-transform: uppercase;
+	font-size: 20px;
+	color: white;
+	letter-spacing: 3px;
+	border-radius: 100px;
+  background: #EEEEEE;
+	border: 2px solid #72bcd4 ;
+	outline: none;
+	cursor: pointer;
+	user-select: none;
+	z-index: 99;
+  margin-left: 50px;
+}
+
+.RegisterStudent-component form button[type=submit]:hover{
+	background: white;
+  color:#192655;
+} */
+
+.RegisterStudent-component form button[type=submit] {
+  background-color: #577790;
+  color: rgba(256,256,256,0.3);
+  border:0;
+  border-radius: 100px;
+  display: block;
+  margin: 15px auto; 
+  padding: 15px 45px;
+  width: 200px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  -webkit-transition: all .3s ease;
+
+  &:hover {
+    transition: all .3s ease;
+    background-color: rgba(20, 20, 20, 0.8);
+    color: white;
+  }
+}
+
+.alreadyHaveAnAccount{
+  /* background-color: #a0aab0; */
+  color: rgba(256,256,256,0.5);
+  color:#a0aab0;
+  border: 0;
+  border-radius: 100px;
+  text-align: center;
+  width: 120px;
+  text-decoration: none;
+  margin: 20px auto;
+  margin-left: 25px;
+  padding: 7px 7px;
+  cursor: pointer;
+  visibility: visible;
+  text-transform: uppercase;
+
+  &:hover {
+    /* transition: all .3s ease; */
+    /* background-color: rgba(20, 20, 20, 0.8); */
+    background-color: black;
+    color: white;
+    line-break: normal;
+    margin-top: 20px;
+  }
+}
