@@ -1,0 +1,67 @@
+.containerForAdmin {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-bottom: 2rem;
+}
+
+.displayAdminContainer {
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 1rem 0rem 1rem;
+}
+
+.displayAdminHeader {
+  background-color: #0D1282;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.displayAdminDetails {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  margin: 0;
+  color: #333;
+  border: none;
+}
+
+.displayAdminLabel {
+  font-weight: bold;
+  color: #333;
+}
+
+.displayAdminForm {
+  padding: 1rem;
+}
+
+.displayAdminButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 150px;
+  border-radius: 100px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  margin: 1rem auto;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.displayAdminButton:hover,
+.displayAdminButton:focus {
+  background-color: #0D1282;
+  color: white;
+  outline: none;
+}

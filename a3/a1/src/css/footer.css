@@ -1,0 +1,13 @@
+
+footer {
+    background-color: #333333; 
+    padding: 10px 0; 
+    text-align: center;
+  
+  }
+  
+  footer p {
+    color: white;
+    font-weight: 500;
+    font-family: 'Sometype Mono', monospace;
+  }

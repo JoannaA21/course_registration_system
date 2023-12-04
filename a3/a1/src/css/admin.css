@@ -1,0 +1,307 @@
+/* .adminpage{
+    background-image: url();
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+  */
+.adminpage{
+  /* background-color: #F5F7F8; */
+  background-image: linear-gradient(to right, rgba(255,255,255, 0.8) 0 100%), url(./BVC.png);
+  height: auto;
+  min-height: 95vh; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* STYLE FOR HEADERS IN ADMIN */
+.Admin-page-Title {
+  display: flex;
+  justify-content: center;
+  text-align: center; 
+  font-size: 2rem; 
+  color: #0D1282;
+  padding: 30px 10px 0px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+
+}  
+
+.admin-subTitle {
+  font-size: 1.5rem; 
+  color: #0D1282;
+  /* margin: 2rem 3rem;  */
+  padding-bottom: 10px;
+  text-align: center;
+}
+/* ADD COURSE BTTON FORM STYLE */
+.addCourseButton {
+  background-color: #0D1282;
+  opacity:0.7;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 22em; 
+  width: 30vw;
+  height: 10vh;
+  font-size: 20px;
+  align-items: center;
+
+}
+
+.addCourseButton:hover {
+  background-color: #0D1282;
+  opacity: unset;
+}
+
+.addCourseButton:focus {
+  outline: none;
+  background-color: #326fb8;
+}
+
+
+/* NO COURSES FOUND STYLE */
+.no-avail{
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  margin: 4rem;
+  color: red;
+}
+
+.no-avail-container {
+  background-color: white;
+  height:auto;
+  width: 107.5vh;
+  display: flex;
+  margin:  auto;
+}
+
+
+/* ADD COURSE FORM CSS */
+.courseFormContainer{
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
+.CourseForm{  
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 2rem 0.5rem 0 0;
+  padding: 1rem 0.5rem 2rem 0rem;
+  border:2px solid black;
+  border-radius: 0.25rem;
+  background-color: white;
+}
+
+.CourseFormTitle{
+  margin-bottom: 2rem;
+}
+
+.courseFormLabel{
+  padding: 1rem 3rem 2rem 0rem;
+}
+
+.CourseForm input, select{
+  /* flex-grow: 1; */
+  width: 200px;
+  min-height: 55px;
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.50rem;
+  margin-right: 0.25rem;
+  margin-bottom: .50rem;
+  outline: none;
+}
+
+.btnAdd, .displayCourseRegister{
+  height: 48px;
+  min-width: 300px;
+  border-radius: 100px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: aliceblue;
+  color: black;
+  cursor: pointer;
+  margin-left: 2.5rem;
+}
+
+.btnAdd:focus, 
+button.btnAdd:hover {
+  color: white;
+  background-color: #379237;
+  outline: none
+} 
+
+
+/*   DISPLAYING COURSES CONTAINER CSS*/
+   /* .courseGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem; 
+    padding-bottom: 2rem;
+  } */
+
+  .courseGrid {
+    margin: 0 auto;
+    width: 120vh;
+  }
+  
+  
+  .displayCourseContainer {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 1rem 0rem 1rem ;
+  }
+  
+ 
+  .displayCourseHeader {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  
+  .displayCourseDetails {
+    background-color: #f7f7f7;
+    padding: 1rem;
+    margin: 0;
+    color: #333;
+    border: none;
+  }
+  
+ 
+  .displayCourseRegister {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    width: 100px;
+    border-radius: 100px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    margin: 1rem auto;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+ 
+  .displayCourseRegister:hover,
+  .displayCourseRegister:focus {
+    background-color: #379237;
+    color:white;
+    outline: none;
+  }
+  
+ 
+  .displayCourseDelete:focus,
+  .displayCourseDrop:focus,
+  .displayCourseDrop {
+    background-color: white;
+    color:black;
+    outline: none;
+  }
+
+  .displayCourseDelete:hover,
+  .displayCourseDrop:hover,
+  .displayCourseToCancel:hover{
+    background-color: red;
+    color: white;
+  }
+
+  
+
+  .displayCourseContainer + .displayCourseContainer {
+    margin-top: 2rem;
+  }
+
+
+
+
+/*   SEARCH FORM CONTIANER CSS */
+  .searchForm{
+    width: 65%;
+    display: flex;
+    justify-content: flex-start;
+    /* margin: 2rem 0 0 1rem; */
+    margin: 20px auto;
+    padding: 0 0.5rem 0.25rem 1rem;
+  }
+  
+  .searchForm label{
+    position: absolute;
+    left: -99999px;
+  }
+  
+  .searchForm input{
+    flex-grow: 1;
+    max-width: 100%;
+    min-height: 50px;
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 100px;
+    outline: none;
+  }
+
+  .noQuestionFromStudent{
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin: 4rem;
+    margin-left: 5em;
+    color: red;
+  }
+
+  .noQuestionFromStudent-container {
+    background-color: white;
+    height:auto;
+    width: 125vh;
+    display: flex;
+    margin-left: 15em;
+  }
+  
+
+  .BVCheaderAdmin{
+    width: 200px;
+    height: 50px;
+    margin-right: 800px;
+  }
+  
+  .loggedInAs{
+    color:#0D1282;
+    font-weight:600;
+    margin: 0 10px;
+  }
+
+  .logoutAdmin{
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    border-radius: 0.25rem;
+    padding: 3px;
+
+    &:hover{
+      background-color: #0D1282;
+      color: white;
+    }
+  }
