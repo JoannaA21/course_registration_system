@@ -9,6 +9,7 @@ import { Registration } from './components/RegisterStudent';
 import { Role } from './components/Role';
 import { Login } from './components/Login';
 import { StudentRegisterCourse, StudentInformation } from './components/Student';
+import { StudentCourse} from './components/Coursepreview';
 import { Admin } from "./components/Admin";
 //import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -94,6 +95,7 @@ function App() {
           <Route path="/adminlogin" element={<Login />} />
           <Route path="/StudentRegisterCourse" element={< StudentRegisterCourse />} />
           <Route path="/registration" element={<Registration />} />
+          <Route path="/coursepreview" element={<StudentCourse />} />
           <Route path="/admin" element={<Admin 
           newquestion={newquestion}
           questions={questions}
