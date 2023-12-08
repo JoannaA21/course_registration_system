@@ -13,6 +13,11 @@ export const Role = () => {
         //router
     }
 
+    const PublicCoursePath = () => {
+        window.location.href = "/coursepreview"
+        console.log("Course preview path")
+    }
+
     return(
     <>
     <div className="role-component">
@@ -21,6 +26,10 @@ export const Role = () => {
                 {/* <h2>AS</h2> */}
                 <button type="button" onClick={StudentPath}>a Student</button>
                 <button type="button" onClick={AdminPath}>an Admin</button>
+            </div>
+
+            <div className="publicCourse">
+                <button type="button" onClick={PublicCoursePath}>View Available Courses</button>
             </div>
     </div>
     </>

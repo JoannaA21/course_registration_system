@@ -84,23 +84,20 @@ export const Login = () => {
             const isStudent = await Axios.post(loginURL, studentdata);
             if(isStudent.status === 200){
                 window.location.replace('studentinfo')
-                console.log(isStudent.data)
+                console.log( isStudent.data.details.details)
+                console.log( isStudent.data.details.token)
+
                 const login = {
-                                "detail": isStudent.data,
-                                "token": isStudent.data,
+                                "detail": isStudent.data.details.details,
+                                "token": isStudent.data.details.token,
                                 "role": 'student'
                             };
-                localStorage.setItem('loggedIn', login);
-                //************* NOT REDIRECTING TO student profile
+                localStorage.setItem('loggedIn', JSON.stringify(login));
             } 
         }catch(error){
             alert('Paasword and/or username does not match.')
         }
        
-
-
-
-
         // const studentData = localStorage.getItem('studentdata') || JSON.stringify(StudentUsers);
         // const jsonData = JSON.parse(studentData);
         // let isStudent = false;
@@ -175,6 +172,5 @@ export const Login = () => {
                 </div>
             </>
         );
-
     }
 };
