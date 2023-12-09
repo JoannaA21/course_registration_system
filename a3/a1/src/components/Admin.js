@@ -8,6 +8,9 @@ import ContactForm from "./ContactForm"
 import { v4 as uuidv4 } from 'uuid';
 import BVCLogo from "../css/BVCLogo.png"
 import { StudentUsers } from './adminData';
+import Axios from "axios"
+
+
 
 
 
@@ -81,11 +84,13 @@ const setAndSaveCourse = (newCourse) => {
 // }
 
 //Handles Changes on the Form
-const handleChange=(e)=>{      
+const handleChange= (e)=>{      
   const name = e.target.name;
   const value = e.target.value;
-  setNewCourse((curCourses)=> 
-    ({...curCourses, [name]: value}));      
+  setNewCourse((curCourses)=>
+  ({...curCourses, [name]: value}));
+
+  // console.log(response)
 }
 
 //Handles the delete
@@ -95,7 +100,7 @@ const handleDelete = (id) => {
 }
 
 //Handles the submit on Add course Form
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
   // const id = cid;
   // setID(cid + 1);
@@ -107,7 +112,18 @@ const handleSubmit = (e) => {
   setAndSaveCourse(updatedCourses);
 
   setNewCourse(initialNewCourse);
-
+   
+  console.log(token.token) 
+  await Axios.post('http://localhost:3001/createcourse', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token.token
+    }
+  }, JSON.stringify(newCourse)).then((response) => {
+    console.log(response)
+  }).catch((error) => {
+    console.log(error)
+  });
 };
   
 const [isFormVisible, setFormVisible] = useState(false);

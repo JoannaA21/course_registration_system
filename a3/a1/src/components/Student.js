@@ -1,4 +1,5 @@
-import { useState } from "react";
+import Axios from "axios"
+import { useState, useEffect } from "react";
 import { CourseList } from "./adminData";
 import Course from "./Course";
 import SearchCourse from './SearchCourse';
@@ -14,7 +15,30 @@ export const StudentRegisterCourse = () => {
     //If no token then redirect to login
     if (!token) window.location.href = 'login';
     else if (token.role === 'admin') window.location.href = 'admin'
-
+    
+    const courseURL = 'http://localhost:3001/';
+    const [userData, setUserData] = useState([]);
+    const [fetchError, setFetchError] = useState(null);
+  
+    useEffect(() => {
+      // Fetch all data when the component mounts
+      fetchAllData();
+    }, []);
+  
+    const fetchAllData = () => {
+      Axios.get(courseURL + 'courses')
+        .then((response) => {
+          console.log(response.data);
+          setUserData(response.data);
+          setFetchError(null);
+        })
+        .catch((error) => {
+          console.warn('Error fetching all data :(', error);
+          setUserData([]);
+          setFetchError("Error fetching data");
+        });
+    };
+    console.log(userData);
     //Student register for courses
     const [newCourse, setNewCourse] = useState({});
     const handleRegister = (course) => {

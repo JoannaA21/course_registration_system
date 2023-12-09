@@ -61,18 +61,41 @@ const login = async (req, res, next) => {
       console.log(`User with id ${username} exists: ${admin.username}`);
 
       // Generate and send the JWT token on successful login
-      const token = jwt.sign({
-        userId: admin.id,
+      // const token = jwt.sign({
+      //   userId: admin.id,
+      //   userOrEmail: username,
+      //   role: 'admin',
+      //   fname: admin.fname,
+      //   lname: admin.lname
+      // }, SECRET_KEY, {
+      //   expiresIn: '1h'
+      // });
+      // return res.status(200).json({
+      //   token
+      // }); // return token to user
+      // Generate and send the JWT token on successful login
+    const token = jwt.sign({
+      userId: admin.id,
+      userOrEmail: username,
+      role: 'admin',
+      fname: admin.fname,
+      lname: admin.lname
+    }, SECRET_KEY, {
+      expiresIn: '1h'
+    });
+    const details = {
+      details: {
+        id: admin.id,
         userOrEmail: username,
         role: 'admin',
         fname: admin.fname,
         lname: admin.lname
-      }, SECRET_KEY, {
-        expiresIn: '1h'
-      });
-      return res.status(200).json({
-        token
-      }); // return token to user
+      },
+      token: token
+    }
+    res.status(200).json({
+      details
+    });
     }
 
     // Find the user by checking both username and email

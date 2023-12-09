@@ -18,7 +18,8 @@ router.get('/verify', verify);
 router.post('/signup', studentUserController.createStudent_user);
 // Routes for forgot password
 router.post('/forgot_passsword', studentUserController.forgotPassword);
-
+//Route for accessing all courses
+router.get('/courses', course.getAllCourses);
 
 // Protected routes (All routed below are in need for token)
 router.use(authenticateToken);
@@ -33,8 +34,7 @@ router.put('/studentuser/:id', studentUserController.updateStudent_user);
 router.delete('/studentuser/:id', studentUserController.deleteStudent_user);
 //Route for creating course
 router.post('/createcourse', isAdmin, course.createCourse); // added isAdmin for role
-//Route for accessing all courses
-router.get('/courses', course.getAllCourses);
+
 //Route for accessing specific course
 router.get('/getcourse/:courseCode', course.getCourse_byCourseCode);
 // Route for delete course

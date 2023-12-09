@@ -23,33 +23,31 @@ export const Login = () => {
         setAdmin({ ...adminlogin, [name]: value });
     };
 
-    const handleSubmitForAdmin = (e) => {
+    const handleSubmitForAdmin = async(e) => {
         e.preventDefault();
-        setSubmitAdm({ username: '', password: '' });
-
-        var isAdmin = false;
-        const token = generate_token(32);
-        console.log(token);
-
-        AdminUsers.forEach(element => {
-            const login = {
-                ...element,
-                "token": token,
-                "role": 'admin'
-            };
-            if (element.username === adminlogin.username && element.password === adminlogin.password) {
-                isAdmin = true;
-                window.location.href = 'admin';
-                localStorage.setItem('loggedIn', JSON.stringify(login));
+        try{
+            let admindata = {
+                "username": adminlogin.username,
+                "password": adminlogin.password
             }
-        });
 
-        if (isAdmin) {
-            window.location.href = 'admin';
-        } else {
-            alert('Username and/or Password is invalid');
+            const isAdmin = await Axios.post(loginURL, admindata);
+            if(isAdmin.status === 200){
+                window.location.replace('admin')
+                console.log( isAdmin.data.details.details)
+                console.log( isAdmin.data.details.token)
+
+                const login = {
+                                "detail": isAdmin.data.details.details,
+                                "token": isAdmin.data.details.token,
+                                "role": 'admin'
+                            };
+                localStorage.setItem('loggedIn', JSON.stringify(login));
+            } 
+        }catch(error){
+            alert('Paasword and/or username does not match.')
         }
-    };
+    }
 
     const handleChangeForStudent = (e) => {
         const name = e.target.name;
