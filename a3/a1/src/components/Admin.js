@@ -11,9 +11,6 @@ import { StudentUsers } from './adminData';
 import Axios from "axios"
 
 
-
-
-
 export const Admin = ({newquestion,handleResponse,handleSubmitRes, questions}) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'))
     if (!token) window.location.href = 'adminlogin'
@@ -78,10 +75,6 @@ const setAndSaveCourse = (newCourse) => {
   localStorage.setItem('ListofCourses', JSON.stringify(newCourse));
 }
 
-// const findMaxID = (courses) => {
-//   if(courses.length === 0) return 0;
-//   return Math.max(...courses.map(course => course.id));
-// }
 
 //Handles Changes on the Form
 const handleChange= (e)=>{      
@@ -94,18 +87,39 @@ const handleChange= (e)=>{
 }
 
 //Handles the delete
+// const handleDelete = (id) => {
+//     const listcourses = courses.filter((course)=> course.id !== id); 
+//     setAndSaveCourse(listcourses);
+// }
+
+//////////////HANDLES DELETE(UPDATE)/////////////////////////////////
 const handleDelete = (id) => {
-    const listcourses = courses.filter((course)=> course.id !== id); 
-    setAndSaveCourse(listcourses);
+  //checks if there are courses
+  if(Array.isArray(courses) && courses.length > 0){
+    Axios.delete(`http://localhost:3001/course/${id}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.token
+      }
+    }
+    )
+    .then((response) => {
+      //filters the course the save it to the state
+      const listcourses = courses.filter((course)=> course.id !== id); 
+      setAndSaveCourse(listcourses);
+    })
+    .catch((error) =>{
+      console.log("Error" + error.message)
+    })
+  }else {
+    console.log("Cannot Execute Delete")
+  }
 }
 
 //Handles the submit on Add course Form
 const handleSubmit = async (e) => {
   e.preventDefault()
-  // const id = cid;
-  // setID(cid + 1);
-  // const maxid = findMaxID(courses);
-  // const id = maxid * 2 + 12 ;
   const id = uuidv4();
   const newCourseItem = { id, ...newCourse };
   const updatedCourses = Array.isArray(courses) ? [...courses, newCourseItem] : [newCourseItem];;

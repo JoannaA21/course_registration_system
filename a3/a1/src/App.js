@@ -37,19 +37,46 @@ function App() {
       ({...curQuestion, [name]: value}));   
   }
 
-  const handleSubmit = (e, name, email) => {
+  // const handleSubmit = (e, name, email) => {
+  //     e.preventDefault()
+  //     const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
+  //     const studid = token.id
+  //     const newquestionItem = { studid,id,name,email, ...newquestion };
+  //     const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];
+  //     setQuestion(updatedQuestion);
+  //     alert('Your question is sent!')
+  //     localStorage.setItem('questions', JSON.stringify(updatedQuestion));
+  //     setNewQuestion({isanswered: false, query:""});
+  // }
+
+  //////////////HANDLE SUBMIT(UPDATED)///
+  const handleSubmit = async (e, name, email) => {
       e.preventDefault()
       const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
       const studid = token.id
       const newquestionItem = { studid,id,name,email, ...newquestion };
-      const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];;
+      const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];
       setQuestion(updatedQuestion);
-      alert('Your question is sent!')
       localStorage.setItem('questions', JSON.stringify(updatedQuestion));
       setNewQuestion({isanswered: false, query:""});
+
+      await Axios.post('http://localhost:3001/studentquery', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.token
+      }
+    }, JSON.stringify(newquestionItem))
+      .then((response) => {
+      //console.log(response)
+      if(response.status === 200){
+        alert('Your question is sent!')
+      }else{
+        console.error("Failed to Submit Question. Try Again")
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
   }
-
-
   const handleResponse = (e, id) => {
       const name = e.target.name;
       const value = e.target.value;
@@ -60,10 +87,34 @@ function App() {
       }));
   };
 
+  // const handleSubmitRes = (id) => {
+  //     // Find the question with the matching id
+  //   const updatedQuestions = questions.map((question) => {
+  //       if (question.id === id) {
+  //           return {
+  //             ...question,
+  //             isanswered: true,
+  //             response: newquestion[id] ? newquestion[id].response : "",
+  //         };
+  //       }
+  //       return question;
+  //       });
 
+  //   setQuestion(updatedQuestions);
+  //   localStorage.setItem('questions', JSON.stringify(updatedQuestions));
+
+  //   setNewQuestion((prevNewQuestions) => ({
+  //       ...prevNewQuestions,
+  //       [id]: { isanswered: false, response: "" },
+  //   }));
+    
+  //   alert('Your response is sent!');
+  // }
+
+  //////HANDLE RESPONSE UPDATED//////////
   const handleSubmitRes = (id) => {
-      // Find the question with the matching id
-    const updatedQuestions = questions.map((question) => {
+       // Find the question with the matching id
+       const updatedQuestions = questions.map((question) => {
         if (question.id === id) {
             return {
               ...question,
@@ -76,13 +127,26 @@ function App() {
 
     setQuestion(updatedQuestions);
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
-
     setNewQuestion((prevNewQuestions) => ({
         ...prevNewQuestions,
         [id]: { isanswered: false, response: "" },
     }));
-    
-    alert('Your response is sent!');
+
+    Axios.put(`http://localhost:3001/adminresponse/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.token
+      }
+    }, JSON.stringify(updatedQuestions))
+      .then((response) => {
+      if(response.status === 200){
+        alert('Your Response is sent!')
+      }else{
+        console.error("Failed to Submit Response. Try Again")
+      }
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
   return (
