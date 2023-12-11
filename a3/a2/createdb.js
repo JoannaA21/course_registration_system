@@ -30,6 +30,7 @@ db.run(`
 db.run(`
   CREATE TABLE IF NOT EXISTS Course (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    courseId TEXT NOT NULL,
     courseCode TEXT NOT NULL,
     courseTitle TEXT NOT NULL, 
     courseStartDate TEXT NOT NULL,

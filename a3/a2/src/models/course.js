@@ -13,6 +13,10 @@ const Course = sequelize.define(
             primaryKey: true,
             autoIncrement: true
         },
+        courseId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         courseCode: {
             type: DataTypes.STRING,
             allowNull: false

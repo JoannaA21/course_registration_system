@@ -169,6 +169,7 @@ export const Admin = ({ newquestion, handleResponse, handleSubmitRes, questions 
     //   console.log(error)
     // });
     let data = JSON.stringify({
+      "courseId": id,
       "courseCode": code,
       "courseTitle": title,
       "courseStartDate": startdate,

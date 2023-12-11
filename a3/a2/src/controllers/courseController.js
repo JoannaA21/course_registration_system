@@ -54,6 +54,7 @@ const getAllCourses = async (req, res, next) => {
 //Creating course (POST)
 const createCourse = async (req, res, next) => {
     const {
+        courseId,
         courseCode,
         courseTitle,
         courseStartDate,
@@ -68,6 +69,7 @@ const createCourse = async (req, res, next) => {
         
 
         const course = await Course.create({
+            courseId,
             courseCode,
             courseTitle,
             courseStartDate,
@@ -90,7 +92,11 @@ const createCourse = async (req, res, next) => {
 const deleteCourse = async (req, res, next) => {
     const { id } = req.params;
     try {
-      const course = await Course.findByPk(id);
+      const course = await Course.findOne({
+          where: Sequelize.or({
+              courseId: id
+          })
+      });
       if (!course) {
         return res.status(404).json({ message: 'Course not found' });
       }
