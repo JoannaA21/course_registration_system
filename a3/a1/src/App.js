@@ -30,9 +30,10 @@ function App() {
   }
   const [newquestion, setNewQuestion] = useState({});
   const [ques, setQues] = useState({});
+  const [res, setRes] = useState({});
 
 
-  const handleChange = (e)=> {
+  const handleChange = async (e)=> {
     const name = e.target.name;
     const value = e.target.value;
     setQues(value);
@@ -85,9 +86,7 @@ function App() {
     //       window.location.href = 'login';
     //   }
     // });
-    console.log(token.detail.fname + ' ' + token.detail.lname)
-    console.log(token.detail.email)
-    console.log(ques)
+    // working details of student questions.
     let data = JSON.stringify({
       "student_id": token.detail.id,
       "student_name": token.detail.fname + ' ' + token.detail.lname,
@@ -117,6 +116,7 @@ function App() {
   const handleResponse = (e, id) => {
       const name = e.target.name;
       const value = e.target.value;
+      setRes(value);
       setNewQuestion((curQuestion)=> 
       ({
         ...curQuestion, 
@@ -149,7 +149,7 @@ function App() {
   // }
 
   //////HANDLE RESPONSE UPDATED//////////
-  const handleSubmitRes = (id) => {
+  const handleSubmitRes = async (id) => {
        // Find the question with the matching id
        const updatedQuestions = questions.map((question) => {
         if (question.id === id) {
@@ -169,26 +169,51 @@ function App() {
         [id]: { isanswered: false, response: "" },
     }));
 
-    Axios.post(`http://localhost:3001/adminresponse/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token.token
-      }
-    }, JSON.stringify(updatedQuestions))
-      .then((response) => {
-      if(response.status === 200){
-        alert('Your Response is sent!')
-      }else{
-        console.error("Failed to Submit Response. Try Again")
-      }
-    }).catch((error) => {
-      console.log(error)
-      if (error.response.status === 401){
-          console.log('session timeout');
-          alert('session timeout');
-          localStorage.removeItem('loggedIn')
-          window.location.href = 'adminlogin';
-      }
+    // Axios.post(`http://localhost:3001/adminresponse/${id}`, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': 'Bearer ' + token.token
+    //   }
+    // }, JSON.stringify(updatedQuestions))
+    //   .then((response) => {
+    //   if(response.status === 200){
+    //     alert('Your Response is sent!')
+    //   }else{
+    //     console.error("Failed to Submit Response. Try Again")
+    //   }
+    // }).catch((error) => {
+    //   console.log(error)
+    //   if (error.response.status === 401){
+    //       console.log('session timeout');
+    //       alert('session timeout');
+    //       localStorage.removeItem('loggedIn')
+    //       window.location.href = 'adminlogin';
+    //   }
+    // });
+    // response post for admin query response
+    let data = JSON.stringify({
+      "response": res,
+      "admin_id": token.detail.id,
+      "id": id
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3001/adminresponse',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token.token}`
+      },
+      data : data
+    };
+    
+    await Axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
     });
   }
 

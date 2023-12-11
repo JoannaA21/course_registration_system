@@ -42,7 +42,7 @@ const adminResponse = async(req,res,next) => {
     try{
         const adminresponse = await ContactForm.findByPk(id);
         if(!adminresponse){
-            res.status(404).json({message: 'No questions from student.'})
+            return res.status(404).json({message: 'No questions from student.'})
         }
         adminresponse.update({
             response: response,

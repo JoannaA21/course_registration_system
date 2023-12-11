@@ -8,7 +8,7 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
     {if (role ==="student"){
         return (
             <div className="containerForContact">
-                <form className="ContactFormStudent" onSubmit={(e) => handleSubmit(e,`${user.fname} ${user.lname}`, user.email)}>
+                <form className="ContactFormStudent" onSubmit={(e) => handleSubmit(e,`${user.detail.fname} ${user.detail.lname}`, user.detail.email)}>
                     <h2 className="FormTitle">Ask a Question</h2>
                     <div className="form-content">
                         <div className="form-row">
