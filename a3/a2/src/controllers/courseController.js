@@ -60,7 +60,8 @@ const createCourse = async (req, res, next) => {
         courseEndDate,
         courseDays,
         courseStartTime,
-        courseEndTime
+        courseEndTime,
+        courseInstructor
     } = req.body;
 
     try {
@@ -74,6 +75,7 @@ const createCourse = async (req, res, next) => {
             courseDays,
             courseStartTime,
             courseEndTime,
+            courseInstructor,
             created_at: today.toISOString(),
             updated_at: today.toISOString()
         });

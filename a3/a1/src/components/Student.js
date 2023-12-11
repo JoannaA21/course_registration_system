@@ -1,4 +1,3 @@
-import Axios from "axios"
 import { useState, useEffect } from "react";
 import { CourseList } from "./adminData";
 import Course from "./Course";
@@ -7,6 +6,7 @@ import ContactForm from "./ContactForm";
 import Response from './Response';
 import StudentHeader from './studentNav';
 import '../css/student.css';
+import Axios from "axios"
 
 //Student search courses (list of courses available)
 export const StudentRegisterCourse = () => {
@@ -14,35 +14,36 @@ export const StudentRegisterCourse = () => {
     const token = JSON.parse(localStorage.getItem('loggedIn'));
     //If no token then redirect to login
     if (!token) window.location.href = 'login';
-    else if (token.role === 'admin') window.location.href = 'admin'
-    
+    else if (token.detail.role === 'admin') window.location.href = 'admin';
+
     const courseURL = 'http://localhost:3001/';
     const [userData, setUserData] = useState([]);
+    const [registerStudentCourse, setregisterStudentCourse] = useState([]);
     const [fetchError, setFetchError] = useState(null);
-  
+    // working but not yet implemented in all courses
     useEffect(() => {
-      // Fetch all data when the component mounts
-      fetchAllData();
+        // Fetch all data when the component mounts
+        fetchAllData();
     }, []);
-  
+
     const fetchAllData = () => {
-      Axios.get(courseURL + 'courses')
-        .then((response) => {
-          console.log(response.data);
-          setUserData(response.data);
-          setFetchError(null);
-        })
-        .catch((error) => {
-          console.warn('Error fetching all data :(', error);
-          setUserData([]);
-          setFetchError("Error fetching data");
-        });
+        Axios.get(courseURL + 'courses')
+            .then((response) => {
+                console.log(response.data);
+                setUserData(response.data);
+                setFetchError(null);
+            })
+            .catch((error) => {
+                console.warn('Error fetching all data :(', error);
+                setUserData([]);
+                setFetchError("Error fetching data");
+            });
     };
     console.log(userData);
     //Student register for courses
     const [newCourse, setNewCourse] = useState({});
-    const handleRegister = (course) => {
-        const studId = { id: token.id, courseid: course };
+    const handleRegister = async (course) => {
+        const studId = { id: token.detail.id, courseid: course };
         // compare registered course if any conflicts on enrolling course
         // console.log(registeredCourses)
         // console.log('map')
@@ -62,20 +63,52 @@ export const StudentRegisterCourse = () => {
         // })
         // end
 
-        if (exchangecourses && exchangecourses.id === token.id) {
+        if (exchangecourses && exchangecourses.id === token.detail.id) {
             const exchange = JSON.parse(localStorage.getItem('course'));
             exchange.push(studId);
             console.log(exchangecourses.courseid);
             const modifiedData = exchange.filter(item => item.courseid !== exchangecourses.courseid);
-            localStorage.setItem("course", JSON.stringify(modifiedData));
-            alert("You have successfully exchange your courses!");
-            // drop the exchange course
-            localStorage.removeItem('exchangecourse');
+            // handle exchange course for backend
+            let data = JSON.stringify({
+                "student_id": token.detail.id,
+                "existingCourse": exchangecourses.courseid,
+                "courseToExchange": course
+              });
+              
+              let config = {
+                method: 'put',
+                maxBodyLength: Infinity,
+                url: 'http://localhost:3001/exchangecourse',
+                headers: { 
+                  'Content-Type': 'application/json', 
+                  'Authorization': `Bearer ${token.token}`
+                },
+                data : data
+              };
+              
+              await Axios.request(config)
+              .then((response) => {
+                console.log(JSON.stringify(response.data));
+                localStorage.setItem("course", JSON.stringify(modifiedData));
+                alert("You have successfully exchange your courses!");
+                // drop the exchange course
+                localStorage.removeItem('exchangecourse');
+              })
+              .catch((error) => {
+                console.log(error);
+                alert('Oops! Something went.');
+                if (error.response.status === 401){
+                    console.log('session timeout');
+                    alert('session timeout');
+                    localStorage.removeItem('loggedIn')
+                    window.location.href = 'login';
+                }
+              });
         } else {
             alert("You have successfully registered!");
             setNewCourse(studId);
             const updatedRegisteredCourse = Array.isArray(registeredCourses) ? [...registeredCourses, studId] : [studId];
-            saveAndSetRegisteredCourses(updatedRegisteredCourse);
+            await saveAndSetRegisteredCourses(updatedRegisteredCourse);
         }
 
         window.location.href = 'studentinfo';
@@ -88,12 +121,48 @@ export const StudentRegisterCourse = () => {
     // available courses
 
     //Create a function to save registered courses on localstorage and on the registeredCourses State
-    const saveAndSetRegisteredCourses = (course) => {
+    const saveAndSetRegisteredCourses = async (course) => {
         setRegisteredCourses(course);
-        localStorage.setItem('course', JSON.stringify(course));
+        const regCourse = JSON.stringify(course);
+        // add new course to database
+        var courseid, id;
+        course.forEach(course =>{ 
+            id = course.id;
+            courseid = course.courseid;
+        })
+        let data = JSON.stringify({
+            "courseid": courseid,
+            "id": id
+          });
+          
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:3001/register',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': `Bearer ${token.token}`
+            },
+            data : data
+          };
+          
+          await Axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+            localStorage.setItem('course', regCourse);
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response.status === 401){
+                console.log('session timeout');
+                alert('session timeout');
+                localStorage.removeItem('loggedIn')
+                window.location.href = 'login';
+            }
+          });
     };
     const handleDrop = (courseid) => {
-        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.id && c.courseid === courseid));
+        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.detail.id && c.courseid === courseid));
         saveAndSetRegisteredCourses(updatedRegisteredCourse);
     };
     const handleCancelExchange = () => {
@@ -104,12 +173,47 @@ export const StudentRegisterCourse = () => {
     //Declare a State for the list of Courses to be displayed on the registration
     const [courses, setCourses] = useState(JSON.parse(localStorage.getItem('ListofCourses')) || CourseList);
     const [exchangecourses, setExchangecourses] = useState(JSON.parse(localStorage.getItem('exchangecourse')) || []);
+    // get registered course
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:3001/getregisteredcourse',
+        headers: { 
+          'Authorization': `Bearer ${token.token}`
+        }
+      };
+
+      useEffect(() => {
+          // Fetch all data when the component mounts
+          fetchAllRegisteredCourse();
+      }, []);
+  
+      const fetchAllRegisteredCourse= async () => {
+      
+      await Axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setRegisteredCourses(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 401){
+            console.log('session timeout');
+            alert('session timeout');
+            localStorage.removeItem('loggedIn')
+            window.location.href = 'login';
+        }
+      });
+
+      };
+      
     //Define a State to store all Courses a student is registeres in
-    const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    // const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    const [registeredCourses, setRegisteredCourses] = useState([]);
     //Define a State for the Search Components
     const [searchCourse, setSearchCourse] = useState('');
     const filteredCoursesAvailable = courses.filter((course) => {
-        const isRegistered = registeredCourses.some((c) => c.id === token.id && c.courseid === course.id);
+        const isRegistered = registeredCourses.some((c) => c.id === token.detail.id && c.courseid === course.id);
         return (
             !isRegistered &&
             (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
@@ -117,9 +221,9 @@ export const StudentRegisterCourse = () => {
         );
     });
     const filteredExchaneCourses = courses.filter((course) => {
-        // const isRegistered = exchangecourses.some((c) => c.id === token.id && c.courseid === course.id);
+        // const isRegistered = exchangecourses.some((c) => c.id === token.detail.id && c.courseid === course.id);
         let isRegistered = null;
-        if (exchangecourses.id === token.id && exchangecourses.courseid === course.id) isRegistered = true;
+        if (exchangecourses.id === token.detail.id && exchangecourses.courseid === course.id) isRegistered = true;
         return (
             isRegistered &&
             (exchangecourses)
@@ -170,12 +274,12 @@ export const StudentRegisterCourse = () => {
 export const StudentInformation = ({ handleChange, handleSubmit, newquestion, questions, handleResponse, handleSubmitRes }) => {
     const token = JSON.parse(localStorage.getItem('loggedIn'));
     if (!token) window.location.href = 'login';
-   else if (token.role === 'admin') window.location.href = 'admin'
+    else if (token.detail.role === 'admin') window.location.href = 'admin';
 
     const getCourse = JSON.parse(localStorage.getItem('course'));
     if (getCourse) {
         getCourse.forEach(e => {
-            if (token.id === e.StudentId) {
+            if (token.detail.id === e.StudentId) {
                 console.log(e.course);
             }
             //console.log(e.StudentId)
@@ -184,7 +288,7 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
 
     //Student exchnage course
     const handleExchange = (course) => {
-        const myexchangeCourse = { id: token.id, courseid: course.id };
+        const myexchangeCourse = { id: token.detail.id, courseid: course.id };
         console.log(myexchangeCourse);
         localStorage.setItem('exchangecourse', JSON.stringify(myexchangeCourse));
         window.location.href = 'studentregistercourse';
@@ -192,32 +296,138 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
 
     //Declare a State for the list of Courses to be displayed on the registration
     const [courses, setCourses] = useState(JSON.parse(localStorage.getItem('ListofCourses')) || CourseList);
+    // get registered course
+    let config = {
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:3001/getregisteredcourse',
+        headers: { 
+          'Authorization': `Bearer ${token.token}`
+        }
+      };
+
+      useEffect(() => {
+          // Fetch all data when the component mounts
+          fetchAllRegisteredCourse();
+      }, []);
+  
+      const fetchAllRegisteredCourse= async () => {
+      
+      await Axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setRegisteredCourses(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.status === 401){
+            console.log('session timeout');
+            alert('session timeout');
+            localStorage.removeItem('loggedIn')
+            window.location.href = 'login';
+        }
+      });
+
+      };
+      
     //Define a State to store all Courses a student is registeres in
-    const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    // const [registeredCourses, setRegisteredCourses] = useState(JSON.parse(localStorage.getItem('course')) || []);
+    const [registeredCourses, setRegisteredCourses] = useState([]);
     const [newCourse, setNewCourse] = useState({});
     //Define a State for the Search Components
     const [searchCourse, setSearchCourse] = useState('');
-    const saveAndSetRegisteredCourses = (course) => {
+
+    const saveAndSetRegisteredCourses = async (course) => {
         setRegisteredCourses(course);
-        localStorage.setItem('course', JSON.stringify(course));
+        const regCourse = JSON.stringify(course);
+        // add new course to database
+        var courseid, id;
+        course.forEach(course =>{ 
+            id = course.id;
+            courseid = course.courseid;
+        })
+        let data = JSON.stringify({
+            "courseid": courseid,
+            "id": id
+          });
+          
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:3001/register',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': `Bearer ${token.token}`
+            },
+            data : data
+          };
+          
+          await Axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+            localStorage.setItem('course', regCourse);
+          })
+          .catch((error) => {
+            console.log(error);
+            if (error.response.status === 401){
+                console.log('session timeout');
+                alert('session timeout');
+                localStorage.removeItem('loggedIn')
+                window.location.href = 'login';
+            }
+          });
     };
 
     const handleRegister = (courseId) => {
-        const mynewCourse = { id: token.id, courseid: courseId };
+        const mynewCourse = { id: token.detail.id, courseid: courseId };
         setNewCourse(mynewCourse);
         const updatedRegisteredCourse = Array.isArray(registeredCourses) ? [...registeredCourses, mynewCourse] : [mynewCourse];
         saveAndSetRegisteredCourses(updatedRegisteredCourse);
     };
 
     //handleDrop
-    const handleDrop = (courseid) => {
-        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.id && c.courseid === courseid));
-        saveAndSetRegisteredCourses(updatedRegisteredCourse);
-        alert('Course successfully dropped.');
+    const handleDrop = async (courseid) => {
+        const updatedRegisteredCourse = registeredCourses.filter((c) => !(c.id === token.detail.id && c.courseid === courseid));
+        console.log(courseid)
+        // saveAndSetRegisteredCourses(updatedRegisteredCourse);
+        //  drop course
+        
+        let data = JSON.stringify({
+            "courseid": courseid,
+            "id": token.detail.id
+          });
+          
+          let config = {
+            method: 'delete',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:3001/coursedrop',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': `Bearer ${token.token}`
+            },
+            data : data
+          };
+          
+          await Axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+            alert('Course successfully dropped.');
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.log(error);
+            alert('Oops! Something went.');
+            if (error.response.status === 401){
+                console.log('session timeout');
+                alert('session timeout');
+                localStorage.removeItem('loggedIn')
+                window.location.href = 'login';
+            }
+          });
     };
 
     const filteredCoursesRegistered = courses.filter((course) => {
-        const isRegistered = registeredCourses.some((c) => c.id === token.id && c.courseid === course.id);
+        const isRegistered = registeredCourses.some((c) => c.id === token.detail.id && c.courseid === course.id);
         return (
             isRegistered &&
             (course.code.toLowerCase().includes(searchCourse.toLowerCase()) ||
@@ -235,16 +445,16 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
                     <div className="card">
                         <div className="student_card_body">
                             <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" />
-                            <h2 className="studentInfo_label">I am a {token.role}</h2>
-                            <p className="info"><b>Student ID: </b>{token.id} </p>
-                            <p className="info"><b>Program: </b>{token.program} </p>
-                            <p className="info"><b>Department: </b>{token.department} </p>
-                            <p className="info"><b>Username: </b> {token.username}</p>
-                            <p className="info"><b>First name: </b>{token.fname} </p>
-                            <p className="info"><b>Last name: </b>{token.lname} </p>
-                            <p className="info"><b>Email: </b>{token.email} </p>
-                            <p className="info"><b>Phone: </b>{token.phone} </p>
-                            <p className="info"><b>DOB: </b>{token.dob}</p>
+                            <h2 className="studentInfo_label">I am a {token.detail.role}</h2>
+                            <p className="info"><b>Student ID: </b>{token.detail.id} </p>
+                            <p className="info"><b>Program: </b>{token.detail.program} </p>
+                            <p className="info"><b>Department: </b>{token.detail.department} </p>
+                            <p className="info"><b>Username: </b> {token.detail.username}</p>
+                            <p className="info"><b>First name: </b>{token.detail.fname} </p>
+                            <p className="info"><b>Last name: </b>{token.detail.lname} </p>
+                            <p className="info"><b>Email: </b>{token.detail.email} </p>
+                            <p className="info"><b>Phone: </b>{token.detail.phone} </p>
+                            <p className="info"><b>DOB: </b>{token.detail.dob}</p>
                         </div>
                     </div>
                 </div>
@@ -269,7 +479,7 @@ export const StudentInformation = ({ handleChange, handleSubmit, newquestion, qu
 
                 <ContactForm
                     role="student"
-                    id={token.id}
+                    id={token.detail.id}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     newquestion={newquestion}

@@ -42,7 +42,8 @@ router.delete('/course/:id', isAdmin, course.deleteCourse);
 //Route for student register for course
 router.post('/register', registeredCourse.studentRegister_ForACourse);
 //Route for student drop course
-router.delete('/coursedrop/:id', registeredCourse.studentDropsACourse);
+// router.delete('/coursedrop/:id', registeredCourse.studentDropsACourse);
+router.delete('/coursedrop', registeredCourse.studentDropsACourse);
 //Route for accessing courses with registered student 
 router.get('/getregisteredcourse', registeredCourse.getAllRegisteredCourses);
 //Route for exchange course for student

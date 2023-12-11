@@ -9,14 +9,14 @@ const today = new Date(timeElapsed); // formated a date today.
 //Add registered course for a specific student
 const studentRegister_ForACourse = async (req, res, next) => {
     const {
-        course_id,
-        student_id
+        courseid,
+        id
     } = req.body
-
+    console.log(req.body)
     try {
         const rCourse = await RegisteredCourse.create({
-            course_id,
-            student_id,
+            course_id: courseid,
+            student_id: id,
             created_at: today.toISOString(),
             updated_at: today.toISOString()
         });
@@ -30,11 +30,21 @@ const studentRegister_ForACourse = async (req, res, next) => {
 
 //Delete registered course of a student
 const studentDropsACourse = async (req, res, next) => {
+    // const {
+    //     id
+    // } = req.params
     const {
+        courseid,
         id
-    } = req.params
+    } = req.body
     try {
-        const dropCourse = await RegisteredCourse.findByPk(id);
+        // const dropCourse = await RegisteredCourse.findByPk(id);
+        const dropCourse = await RegisteredCourse.findOne({
+            where: Sequelize.or({
+                course_id: courseid,
+                student_id: id
+            })
+        });
         if (!dropCourse) {
             return res.status(404).json({
                 message: 'Course not found.'
@@ -51,7 +61,12 @@ const studentDropsACourse = async (req, res, next) => {
 //Access all registered course
 const getAllRegisteredCourses = async (req, res, next) => {
     try {
-        const course = await RegisteredCourse.findAll();
+        const course = await RegisteredCourse.findAll({
+            attributes: [
+              ['student_id', 'id'],
+              ['course_id', 'courseid'],
+            ],
+          });
         if (!course) {
             return res.status(404).json({
                 message: 'Course does not exist.'

@@ -20,40 +20,40 @@ const login = async (req, res, next) => {
     }
 
     const validateAdmin = [{
-        "id": "1",
-        "fname": "Tigist",
-        "lname": "Beshy",
-        "username": "TB123",
-        "password": "TB123"
-      },
-      {
-        "id": "2",
-        "fname": "Fairbanks",
-        "lname": "Magtibang",
-        "username": "FM123",
-        "password": "FM123"
-      },
-      {
-        "id": "3",
-        "fname": "Jozel",
-        "lname": "Surro",
-        "username": "JS123",
-        "password": "JS123"
-      },
-      {
-        "id": "4",
-        "fname": "Joanna",
-        "lname": "Apellido",
-        "username": "JA123",
-        "password": "JA123"
-      },
-      {
-        "id": "5",
-        "fname": "Denis",
-        "lname": "Onu",
-        "username": "DO123",
-        "password": "DO123"
-      },
+      "id": "1",
+      "fname": "Tigist",
+      "lname": "Beshy",
+      "username": "TB123",
+      "password": "TB123"
+    },
+    {
+      "id": "2",
+      "fname": "Fairbanks",
+      "lname": "Magtibang",
+      "username": "FM123",
+      "password": "FM123"
+    },
+    {
+      "id": "3",
+      "fname": "Jozel",
+      "lname": "Surro",
+      "username": "JS123",
+      "password": "JS123"
+    },
+    {
+      "id": "4",
+      "fname": "Joanna",
+      "lname": "Apellido",
+      "username": "JA123",
+      "password": "JA123"
+    },
+    {
+      "id": "5",
+      "fname": "Denis",
+      "lname": "Onu",
+      "username": "DO123",
+      "password": "DO123"
+    },
     ];
 
     const admin = validateAdmin.find(user => user.username === username && user.password === password);
@@ -74,35 +74,35 @@ const login = async (req, res, next) => {
       //   token
       // }); // return token to user
       // Generate and send the JWT token on successful login
-    const token = jwt.sign({
-      userId: admin.id,
-      userOrEmail: username,
-      role: 'admin',
-      fname: admin.fname,
-      lname: admin.lname
-    }, SECRET_KEY, {
-      expiresIn: '1h'
-    });
-    const details = {
-      details: {
-        id: admin.id,
+      const token = jwt.sign({
+        userId: admin.id,
         userOrEmail: username,
         role: 'admin',
         fname: admin.fname,
         lname: admin.lname
-      },
-      token: token
-    }
-    res.status(200).json({
-      details
-    });
+      }, SECRET_KEY, {
+        expiresIn: '1h'
+      });
+      const details = {
+        details: {
+          id: admin.id,
+          userOrEmail: username,
+          role: 'admin',
+          fname: admin.fname,
+          lname: admin.lname
+        },
+        token: token
+      };
+      return res.json({
+        details
+      });
     }
 
     // Find the user by checking both username and email
     const user = await Student_user.findOne({
       where: Sequelize.or({
-          username: username
-        }, // Check if the username matches the username field
+        username: username
+      }, // Check if the username matches the username field
         {
           email: username
         } // Check if the username matches the email field
@@ -147,7 +147,7 @@ const login = async (req, res, next) => {
         dob: user.dob
       },
       token: token
-    }
+    };
     res.json({
       details
     });

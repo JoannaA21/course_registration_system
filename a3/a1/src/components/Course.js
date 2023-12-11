@@ -27,7 +27,7 @@ const Course = ({ courses, handleDelete, handleRegister, handleDrop, handleExcha
             <div className="courseGrid">
                 {courses.map((course) => {
                     // Check if the student is registered in the current course
-                    const isRegistered = Array.isArray(registeredCourses) && registeredCourses.some(c => c.id === data.id && c.courseid === course.id);
+                    const isRegistered = Array.isArray(registeredCourses) && registeredCourses.some(c => c.id === data.detail.id && c.courseid === course.id);
 
                     return (
                         <li className="displayCourseContainer" id={`courseContainer-${course.id || course.course.id}`} key={course.id}>

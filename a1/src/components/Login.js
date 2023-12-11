@@ -31,19 +31,19 @@ export const Login = () => {
                 "password": adminlogin.password
             }
 
-            const isAdmin = await Axios.post(loginURL, admindata);
-            if(isAdmin.status === 200){
-                window.location.replace('admin')
-                console.log( isAdmin.data.details.details)
-                console.log( isAdmin.data.details.token)
+            // const isAdmin = await Axios.post(loginURL, admindata);
+            // if(isAdmin.status === 200){
+            //     window.location.replace('admin')
+            //     console.log( isAdmin.data.details.details)
+            //     console.log( isAdmin.data.details.token)
 
-                const login = {
-                                "detail": isAdmin.data.details.details,
-                                "token": isAdmin.data.details.token,
-                                "role": 'admin'
-                            };
-                localStorage.setItem('loggedIn', JSON.stringify(login));
-            } 
+            //     const login = {
+            //                     "detail": isAdmin.data.details.details,
+            //                     "token": isAdmin.data.details.token,
+            //                     "role": 'admin'
+            //                 };
+            //     localStorage.setItem('loggedIn', JSON.stringify(login));
+            // } 
         }catch(error){
             alert('Paasword and/or username does not match.')
         }
