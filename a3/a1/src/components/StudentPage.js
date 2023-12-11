@@ -11,7 +11,7 @@ const StudentPage = ({handleChange,handleSubmit,newquestion,questions}) => {
     //Gets the User Token
     const token = JSON.parse(localStorage.getItem('loggedIn'))
     //if (!token) window.location.href = 'studentlogin'
-    //const studetnId = token.id;
+    const studetnId = token.detail.id;
 
 
     //Declare a State for the list of Courses to be displayed on the registration

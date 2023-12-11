@@ -17,7 +17,7 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
                             type="text"
                             id="name"
                             name="name"
-                            value={user.fname +" "+user.lname}
+                            value={user.detail.fname +" "+user.detail.lname}
                             placeholder="Full Name"
                             disabled
                             />
@@ -28,7 +28,7 @@ export const ContactForm = ({ role, handleSubmit, handleChange, handleResponse,n
                             type="email"
                             name="email"
                             id="email"
-                            value={user.email}
+                            value={user.detail.email}
                             disabled
                             placeholder="Email Address"
                             />

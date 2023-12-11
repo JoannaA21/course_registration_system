@@ -16,6 +16,7 @@ import Footer from './components/common/Footer';
 import {Logout} from './components/common/Logout';
 import './index.css';
 import { Error } from './components/Error'
+import Axios from "axios"
 
 function App() {
 
@@ -28,28 +29,91 @@ function App() {
           query:''
   }
   const [newquestion, setNewQuestion] = useState({});
+  const [ques, setQues] = useState({});
 
 
   const handleChange = (e)=> {
     const name = e.target.name;
     const value = e.target.value;
+    setQues(value);
     setNewQuestion((curQuestion)=> 
       ({...curQuestion, [name]: value}));   
   }
 
-  const handleSubmit = (e, name, email) => {
+  // const handleSubmit = (e, name, email) => {
+  //     e.preventDefault()
+  //     const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
+  //     const studid = token.id
+  //     const newquestionItem = { studid,id,name,email, ...newquestion };
+  //     const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];
+  //     setQuestion(updatedQuestion);
+  //     alert('Your question is sent!')
+  //     localStorage.setItem('questions', JSON.stringify(updatedQuestion));
+  //     setNewQuestion({isanswered: false, query:""});
+  // }
+
+  //////////////HANDLE SUBMIT(UPDATED)///
+  const handleSubmit = async (e, name, email) => {
       e.preventDefault()
       const id = questions.length ? questions[questions.length - 1].id + 1 : 1;
-      const studid = token.id
+      const studid = token.detail.id
       const newquestionItem = { studid,id,name,email, ...newquestion };
-      const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];;
+      const updatedQuestion = Array.isArray(questions) ? [...questions, newquestionItem] : [newquestionItem];
       setQuestion(updatedQuestion);
-      alert('Your question is sent!')
       localStorage.setItem('questions', JSON.stringify(updatedQuestion));
       setNewQuestion({isanswered: false, query:""});
+
+    //   await Axios.post('http://localhost:3001/studentquery', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': 'Bearer ' + token.token
+    //   }
+    // }, JSON.stringify(newquestionItem))
+    //   .then((response) => {
+    //   //console.log(response)
+    //   if(response.status === 200){
+    //     alert('Your question is sent!')
+    //   }else{
+    //     console.error("Failed to Submit Question. Try Again")
+    //   }
+    // }).catch((error) => {
+    //   console.log(error)
+    //   if (error.response.status === 401){
+    //       console.log('session timeout');
+    //       alert('session timeout');
+    //       localStorage.removeItem('loggedIn')
+    //       window.location.href = 'login';
+    //   }
+    // });
+    console.log(token.detail.fname + ' ' + token.detail.lname)
+    console.log(token.detail.email)
+    console.log(ques)
+    let data = JSON.stringify({
+      "student_id": token.detail.id,
+      "student_name": token.detail.fname + ' ' + token.detail.lname,
+      "student_email": token.detail.email,
+      "query": ques
+    });
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3001/studentquery',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': `Bearer ${token.token}`
+      },
+      data : data
+    };
+    
+    await Axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
-
-
   const handleResponse = (e, id) => {
       const name = e.target.name;
       const value = e.target.value;
@@ -60,10 +124,34 @@ function App() {
       }));
   };
 
+  // const handleSubmitRes = (id) => {
+  //     // Find the question with the matching id
+  //   const updatedQuestions = questions.map((question) => {
+  //       if (question.id === id) {
+  //           return {
+  //             ...question,
+  //             isanswered: true,
+  //             response: newquestion[id] ? newquestion[id].response : "",
+  //         };
+  //       }
+  //       return question;
+  //       });
 
+  //   setQuestion(updatedQuestions);
+  //   localStorage.setItem('questions', JSON.stringify(updatedQuestions));
+
+  //   setNewQuestion((prevNewQuestions) => ({
+  //       ...prevNewQuestions,
+  //       [id]: { isanswered: false, response: "" },
+  //   }));
+    
+  //   alert('Your response is sent!');
+  // }
+
+  //////HANDLE RESPONSE UPDATED//////////
   const handleSubmitRes = (id) => {
-      // Find the question with the matching id
-    const updatedQuestions = questions.map((question) => {
+       // Find the question with the matching id
+       const updatedQuestions = questions.map((question) => {
         if (question.id === id) {
             return {
               ...question,
@@ -76,13 +164,32 @@ function App() {
 
     setQuestion(updatedQuestions);
     localStorage.setItem('questions', JSON.stringify(updatedQuestions));
-
     setNewQuestion((prevNewQuestions) => ({
         ...prevNewQuestions,
         [id]: { isanswered: false, response: "" },
     }));
-    
-    alert('Your response is sent!');
+
+    Axios.post(`http://localhost:3001/adminresponse/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token.token
+      }
+    }, JSON.stringify(updatedQuestions))
+      .then((response) => {
+      if(response.status === 200){
+        alert('Your Response is sent!')
+      }else{
+        console.error("Failed to Submit Response. Try Again")
+      }
+    }).catch((error) => {
+      console.log(error)
+      if (error.response.status === 401){
+          console.log('session timeout');
+          alert('session timeout');
+          localStorage.removeItem('loggedIn')
+          window.location.href = 'adminlogin';
+      }
+    });
   }
 
   return (

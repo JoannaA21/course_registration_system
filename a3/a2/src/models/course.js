@@ -41,6 +41,10 @@ const Course = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
+        courseInstructor: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         created_at: {
             type: DataTypes.STRING,
             allowNull: false,

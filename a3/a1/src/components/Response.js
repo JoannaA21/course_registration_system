@@ -4,7 +4,7 @@ const Response = ({questions}) => {
 
     const user = JSON.parse(localStorage.getItem('loggedIn'));
     const myansweredquestions = questions.filter((data) => 
-        data.studid === user.id && data.isanswered === true
+        data.studid === user.detail.id && data.isanswered === true
     )
 
     return (

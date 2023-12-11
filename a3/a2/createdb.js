@@ -37,6 +37,7 @@ db.run(`
     courseDays TEXT NOT NULL,
     courseStartTime TEXT NOT NULL,
     courseEndTime TEXT NOT NULL,
+    courseInstructor TEXT NOT NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
   )
@@ -54,10 +55,7 @@ db.run(`
     course_id INTEGER NOT NULL,
     student_id INTEGER NOT NULL, 
     created_at TEXT NOT NULL,
-    updated_at TEXT NOT NULL,
-    FOREIGN KEY(student_id) REFERENCES Student_user(id),
-    FOREIGN KEY(course_id) REFERENCES Course(id)
-
+    updated_at TEXT NOT NULL
   )
 `, (err) => {
   if (err) {
